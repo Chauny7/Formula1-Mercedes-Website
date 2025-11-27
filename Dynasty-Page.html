@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynasty History — Mercedes F1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000;
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 暗色主题：黑 + PETRONAS 青绿色 + 银色 */
+        body.theme-dark {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-bar {
+            background-color: #050505;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(0, 210, 190, 0.6);
+        }
+
+        body.theme-dark .header-logo {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .nav-item {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .nav-item.active {
+            background: linear-gradient(135deg, #00D2BE, #00A896);
+            color: #050505;
+            box-shadow: 0 4px 18px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .event-item::before {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        body.theme-dark .event-content {
+            background: rgba(5, 5, 5, 0.96);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .event-headline {
+            color: #f5f5f5;
+        }
+
+        body.theme-dark .event-excerpt {
+            color: #d0d0d0;
+        }
+
+        body.theme-dark .event-meta {
+            color: #b0b0b0;
+            border-top-color: #444;
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header-logo:hover {
+            color: #666;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            color: #000;
+            background: rgba(0, 210, 190, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #00D2BE, #00A896);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.3);
+        }
+
+        .nav-item.active:hover {
+            background: linear-gradient(135deg, #00A896, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 190, 0.4);
+        }
+
+        .nav-item:active {
+            transform: translateY(0);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* ========== 音频播放控制按钮 ========== */
+        .audio-control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .audio-control-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .audio-control-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        .audio-control-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(140deg) brightness(98%) contrast(104%);
+        }
+
+        body.theme-dark .audio-control-btn img {
+            filter: brightness(0) saturate(100%) invert(86%) sepia(17%) saturate(1635%) hue-rotate(140deg) brightness(100%) contrast(101%);
+        }
+
+        .audio-control-btn.playing img {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+        }
+
+        /* 隐藏的音频元素 */
+        #background-audio {
+            display: none;
+        }
+
+        .main-content {
+            margin-top: 70px;
+            padding: 0;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            display: block;
+        }
+
+        /* 移除侧边栏 */
+        .sidebar {
+            display: none;
+        }
+
+        /* 左侧内容区 */
+        .events-container {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .page-header {
+            display: none;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* 事件列表样式 - 全屏滚动 */
+        .events-grid {
+            display: block;
+        }
+
+        .event-item {
+            width: 100%;
+            height: 100vh;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            overflow: hidden;
+        }
+
+        .event-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .event-item > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .event-item:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .event-image-container {
+            display: none;
+        }
+
+        .event-content {
+            max-width: 900px;
+            width: 90%;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .event-category {
+            font-size: 0.9rem;
+            color: #00D2BE;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .event-headline {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .event-excerpt {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* 视频嵌入样式 */
+        .event-video-container {
+            margin: 30px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.02);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-video-container:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-video-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .event-video-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 22px solid white;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            z-index: 3;
+        }
+
+        .event-video-container:hover::before {
+            background: rgba(255, 0, 0, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .event-video-link {
+            display: block;
+            width: 100%;
+            max-width: 700px;
+            height: 394px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            border-radius: 8px;
+            position: relative;
+            text-decoration: none;
+            color: white;
+        }
+
+        .event-video-link-text {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 4;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .event-video-link {
+                height: 250px;
+            }
+            
+            .event-video-container::before {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .event-video-container::after {
+                border-left: 15px solid white;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                transform: translate(-40%, -50%);
+            }
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: #999;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .event-date {
+            font-weight: 600;
+            color: #666;
+        }
+
+        /* 右侧侧边栏 */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            width: 280px;
+            height: calc(100vh - 90px);
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-left: 1px solid #e0e0e0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* 自定义滚动条样式 */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #000;
+            text-align: center;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 12px 15px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .sidebar-link:hover {
+            background: #e9ecef;
+            color: #000;
+        }
+
+        .sidebar-link.active {
+            background: #00D1B2;
+            color: white;
+            font-weight: bold;
+        }
+
+        .sidebar-nav-date {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .sidebar-nav-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* 事件锚点 */
+        .event-anchor {
+            scroll-margin-top: 70px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .main-content {
+                padding: 0;
+            }
+
+            .event-content {
+                padding: 40px 30px;
+                width: 95%;
+            }
+
+            .event-headline {
+                font-size: 1.8rem;
+            }
+
+            .event-excerpt {
+                font-size: 1rem;
+            }
+
+            .event-category {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <script>
+        // 主题切换
+        function applyStoredTheme() {
+            try {
+                const stored = localStorage.getItem('siteTheme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.body.classList.add('theme-dark');
+                } else {
+                    document.body.classList.remove('theme-dark');
+                }
+                const btn = document.getElementById('themeToggleBtn');
+                if (btn) {
+                    btn.textContent = document.body.classList.contains('theme-dark') ? 'Light Mode' : 'Dark Mode';
+                }
+            } catch (e) {
+                console.error('Theme apply error:', e);
+            }
+        }
+
+        function initThemeToggle() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('theme-dark');
+                localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+                btn.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+            });
+        }
+
+        function goToLewis() { window.location.href = 'Lewis-Page.html'; }
+        function goToToto() { window.location.href = 'Toto-Page.html'; }
+        function goToGeorge() { window.location.href = 'Russel-Page.html'; }
+        function goToCar() { window.location.href = 'Car-Page.html'; }
+        function goToDynasty() { window.location.href = 'Dynasty-Page.html'; }
+        function goHome() { window.location.href = 'Home-Page.html'; }
+
+        // 事件数据 - 与index.html中的newsData保持一致
+        const eventsData = [
+            {
+                id: 'event-1',
+                category: "DRIVER TRANSFER",
+                headline: "Lewis Hamilton Joins Mercedes After McLaren Departure",
+                excerpt: "On December 17, 2012, Lewis Hamilton announced his departure from McLaren after five seasons, signing a three-year contract with Mercedes AMG Petronas. The move marked a new chapter for both the British driver and the German manufacturer, with Hamilton replacing Michael Schumacher as the team's lead driver. This pivotal decision laid the foundation for Mercedes' future dominance in Formula 1.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "December 17, 2012",
+                sortDate: "2012-12-17",
+                video: "https://www.youtube.com/shorts/mGi7OnicN94"
+            },
+            {
+                id: 'event-2',
+                category: "TEAM MANAGEMENT",
+                headline: "Toto Wolff Takes Charge of Mercedes F1 Team",
+                excerpt: "In January 2013, Toto Wolff, an Austrian businessman with a 33% stake in Mercedes, was appointed as Executive Director of the team, replacing Ross Brawn as team principal. This management restructuring was crucial in transforming Mercedes from a mid-field team into a championship contender. Wolff's strategic leadership would become instrumental in the team's future success.",
+                image: "Asset/Toto Wolff 2025 Desktop Wallpaper 3.jpg",
+                date: "January 2013",
+                sortDate: "2013-01-01"
+            },
+            {
+                id: 'event-3',
+                category: "HISTORIC MOMENT",
+                headline: "Mercedes Dominates First Hybrid Era Season",
+                excerpt: "The 2014 season marked F1's transition to 1.6L V6 turbocharged hybrid power units, the most significant regulation change in F1 history. Mercedes capitalized on the new rules with the W05 Hybrid, securing 16 of 19 race wins. Lewis Hamilton claimed his second world title while the team won its first Constructors' Championship since 1955, beginning an era of unprecedented dominance.",
+                image: "Asset/Gallery-1.webp",
+                date: "2014 Season",
+                sortDate: "2014-12-31"
+            },
+            {
+                id: 'event-4',
+                category: "RACE INCIDENT",
+                headline: "Hamilton-Rosberg Collision Shocks Barcelona",
+                excerpt: "During the 2015 Spanish Grand Prix, Mercedes teammates Lewis Hamilton and Nico Rosberg collided on lap 1 while battling for the lead. Both cars spun off track and retired, handing victory to Ferrari's Sebastian Vettel. The incident highlighted the intense intra-team rivalry and prompted Mercedes to implement stricter team orders to prevent future collisions.",
+                image: "Asset/Dutch GP 2025 Desktop Wallpaper 1.jpg",
+                date: "May 10, 2015",
+                sortDate: "2015-05-10"
+            },
+            {
+                id: 'event-5',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Rosberg Claims First World Title in Abu Dhabi",
+                excerpt: "At the 2016 Abu Dhabi Grand Prix finale, Nico Rosberg clinched his first and only World Championship after starting from pole position. Despite Lewis Hamilton winning the race, Rosberg's second-place finish secured the title by five points. The victory made the Rosbergs the second father-son duo (after the Hills) to become F1 World Champions.",
+                image: "Asset/Dutch GP 2025 Desktop Wallpaper 2.jpg",
+                date: "November 27, 2016",
+                sortDate: "2016-11-27"
+            },
+            {
+                id: 'event-9',
+                category: "DRIVER RETIREMENT",
+                headline: "Nico Rosberg's Shock Retirement",
+                excerpt: "On December 2, 2016, merely five days after clinching his first Formula 1 World Championship, Nico Rosberg stunned the motorsport world by announcing his immediate retirement. At the FIA Prize Gala in Vienna, the German driver revealed he had achieved his lifelong dream and no longer had the will to continue, wishing to focus on family life. This decision marked the abrupt end of the intense \"Hamilton-Rosberg\" era and forced Mercedes to seek a new driver for the 2017 season.",
+                image: "Asset/Dutch GP 2025 Desktop Wallpaper 2.jpg",
+                date: "December 2, 2016",
+                sortDate: "2016-12-02"
+            },
+            {
+                id: 'event-10',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Hamilton's Dominant Return",
+                excerpt: "In the 2017 season, Lewis Hamilton mounted a relentless campaign to reclaim the World Championship. After a fierce battle with Sebastian Vettel's Ferrari, Hamilton and Mercedes emerged supreme after the summer break. A dominant streak through the Asian leg of the season, including consecutive victories in Singapore, Malaysia, and Japan, proved decisive. He sealed his fourth world title with a win at the United States Grand Prix, re-establishing himself as the sport's undisputed leader.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "October 22, 2017",
+                sortDate: "2017-10-22"
+            },
+            {
+                id: 'event-11',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Hamilton's Destiny-Fulfilling Fifth",
+                excerpt: "The 2018 season saw another epic duel with Sebastian Vettel and Ferrari. The championship momentum swung decisively at the German Grand Prix, where a crash from the lead by Vettel handed Hamilton a stunning victory. From that point, Hamilton displayed supreme consistency and psychological strength, capitalizing on his rival's errors. He secured his fifth World Championship at the Mexican Grand Prix, moving into rarefied air in the sport's history books.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "October 28, 2018",
+                sortDate: "2018-10-28"
+            },
+            {
+                id: 'event-12',
+                category: "HISTORIC ACHIEVEMENT",
+                headline: "Mercedes' Unprecedented Six-Double",
+                excerpt: "The 2019 season cemented the Mercedes dynasty as the most successful in the modern era. Despite a strong start from teammate Valtteri Bottas, Lewis Hamilton's relentless performance throughout the year brought him to the brink of another title. By finishing second at the United States Grand Prix, he secured his sixth World Championship. More importantly, it guaranteed Mercedes an unprecedented sixth consecutive Drivers' and Constructors' Championship double, a feat that solidified their status as one of Formula 1's greatest ever teams.",
+                image: "Asset/Gallery-1.webp",
+                date: "November 3, 2019",
+                sortDate: "2019-11-03"
+            },
+            {
+                id: 'event-6',
+                category: "HISTORIC ACHIEVEMENT",
+                headline: "Hamilton Matches Schumacher's Seven Titles in Turkey",
+                excerpt: "In the 2020 Turkish Grand Prix, Lewis Hamilton secured his seventh World Championship with a stunning drive in challenging wet conditions. The victory tied Michael Schumacher's record of seven world titles. Mercedes' dominance was evident as both Hamilton and Bottas finished in the top two, securing the team's seventh consecutive Constructors' Championship.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "November 15, 2020",
+                sortDate: "2020-11-15",
+                video: "https://www.youtube.com/watch?v=tKb5-5yWeCA"
+            },
+            {
+                id: 'event-7',
+                category: "TECHNICAL INNOVATION",
+                headline: "W11 Sets New Standard as F1's Most Dominant Car",
+                excerpt: "The Mercedes W11, raced during the 2020 season, became statistically the most dominant F1 car in history. It won 13 of 17 races, achieved 15 pole positions, and set numerous lap records. The car's exceptional performance, particularly in qualifying trim, gave Hamilton and Bottas a significant advantage throughout the season, cementing Mercedes' place in F1 history.",
+                image: "Asset/Gallery-3.webp",
+                date: "2020 Season",
+                sortDate: "2020-12-31",
+                video: "https://www.youtube.com/shorts/tad1xFXRfts"
+            },
+            {
+                id: 'event-8',
+                category: "CHAMPIONSHIP CONTROVERSY",
+                headline: "Abu Dhabi Finale Ends Mercedes' Dominance",
+                excerpt: "The 2021 Abu Dhabi Grand Prix concluded with one of F1's most controversial moments. After a late safety car period, race director Michael Masi allowed only the lapped cars between Hamilton and Verstappen to unlap themselves, setting up a one-lap sprint finish. Verstappen overtook Hamilton on the final lap to win both the race and the championship, ending Mercedes' seven-year dominance of the Drivers' Championship.",
+                image: "Asset/Thank You Lewis Desktop Wallpaper 4.jpg",
+                date: "December 12, 2021",
+                sortDate: "2021-12-12",
+                video: "https://www.youtube.com/watch?v=MTe12fH2xtQ"
+            }
+        ].sort((a, b) => a.sortDate.localeCompare(b.sortDate));
+
+        // 加载事件列表
+        function loadEvents() {
+            const eventsGrid = document.getElementById('eventsGrid');
+            
+            eventsGrid.innerHTML = '';
+
+            eventsData.forEach((event, index) => {
+                // 创建事件项
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item event-anchor';
+                eventItem.id = event.id;
+                // 设置背景图片
+                eventItem.style.backgroundImage = `url('${event.image}')`;
+                
+                eventItem.innerHTML = `
+                    <div class="event-content">
+                        <div>
+                            <div class="event-category">${event.category}</div>
+                            <div class="event-headline">${event.headline}</div>
+                            <div class="event-excerpt">${event.excerpt}</div>
+                            ${event.video ? `
+                            <div class="event-video-container" onclick="window.open('${event.video}', '_blank')">
+                                <a href="${event.video}" target="_blank" class="event-video-link" onclick="event.stopPropagation();">
+                                    <span class="event-video-link-text">Watch Video: ${event.headline}</span>
+                                </a>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <div class="event-meta">
+                            <span class="event-date">${event.date}</span>
+                        </div>
+                    </div>
+                `;
+                eventsGrid.appendChild(eventItem);
+            });
+        }
+
+        // 音频控制功能
+        function initAudioControl() {
+            const audio = document.getElementById('background-audio');
+            const btn = document.getElementById('audioControlBtn');
+            
+            if (!audio || !btn) return;
+
+            // 从sessionStorage恢复音频状态
+            const savedState = sessionStorage.getItem('audioState');
+            const savedTime = sessionStorage.getItem('audioTime');
+            const isHomePage = window.location.pathname.includes('Home-Page');
+            
+            // 如果进入的是音乐页面,自动播放
+            if (!isHomePage) {
+                if (savedState === 'playing' && savedTime) {
+                    // 如果之前有播放状态,恢复播放位置
+                    audio.currentTime = parseFloat(savedTime);
+                }
+                // 自动开始播放
+                audio.play().then(() => {
+                    sessionStorage.setItem('audioState', 'playing');
+                    btn.classList.add('playing');
+                }).catch(e => {
+                    console.log('自动播放被阻止:', e);
+                    // 如果自动播放被阻止,需要用户手动点击
+                });
+            } else {
+                // 如果是首页,停止播放
+                audio.pause();
+                sessionStorage.removeItem('audioState');
+                sessionStorage.removeItem('audioTime');
+            }
+
+            // 按钮点击事件
+            btn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        sessionStorage.setItem('audioState', 'playing');
+                        btn.classList.add('playing');
+                    }).catch(e => {
+                        console.log('播放失败:', e);
+                    });
+                } else {
+                    audio.pause();
+                    sessionStorage.setItem('audioState', 'paused');
+                    btn.classList.remove('playing');
+                }
+            });
+
+            // 定期保存播放时间
+            setInterval(() => {
+                if (!audio.paused) {
+                    sessionStorage.setItem('audioTime', audio.currentTime.toString());
+                    sessionStorage.setItem('audioState', 'playing');
+                }
+            }, 1000);
+
+            // 页面卸载前保存状态
+            window.addEventListener('beforeunload', function() {
+                if (!audio.paused) {
+                    sessionStorage.setItem('audioTime', audio.currentTime.toString());
+                    sessionStorage.setItem('audioState', 'playing');
+                } else {
+                    sessionStorage.setItem('audioState', 'paused');
+                }
+            });
+
+            // 监听音频播放状态
+            audio.addEventListener('play', function() {
+                btn.classList.add('playing');
+                sessionStorage.setItem('audioState', 'playing');
+            });
+
+            audio.addEventListener('pause', function() {
+                btn.classList.remove('playing');
+                sessionStorage.setItem('audioState', 'paused');
+            });
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            applyStoredTheme();
+            initThemeToggle();
+            initAudioControl();
+            loadEvents();
+            
+            // 检查URL hash，如果有则滚动到对应位置
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                setTimeout(() => {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            }
+        });
+    </script>
+    </head>
+<body>
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+        <nav class="header-nav">
+            <a href="#" class="nav-item active" onclick="goToDynasty()">Dynasty History</a>
+            <a href="#" class="nav-item" onclick="goToLewis()">Lewis Hamilton</a>
+            <a href="#" class="nav-item" onclick="goToToto()">Toto Wolff</a>
+            <a href="#" class="nav-item" onclick="goToGeorge()">George Russell</a>
+            <a href="#" class="nav-item" onclick="goToCar()">Car Evolution</a>
+        </nav>
+        <div class="header-actions">
+            <button class="audio-control-btn" id="audioControlBtn" title="播放/暂停音乐">
+                <img src="Asset/播放 (1).png" alt="播放/暂停">
+            </button>
+            <button class="theme-toggle-btn" id="themeToggleBtn">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- 背景音乐 -->
+    <audio id="background-audio" loop>
+        <source src="Asset/bensound-tomorrow.mp3" type="audio/mpeg">
+    </audio>
+
+    <main class="main-content">
+        <div class="events-container">
+            <div class="events-grid" id="eventsGrid">
+                <!-- 事件将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </main>
+</body>
+</html>

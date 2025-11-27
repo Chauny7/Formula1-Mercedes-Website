@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toto Wolff: The Mercedes Era (2013–Present)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* 暗色主题：黑 + PETRONAS 青绿色 + 银色 */
+        body.theme-dark {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-bar {
+            background-color: #050505;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(0, 210, 190, 0.6);
+        }
+
+        body.theme-dark .header-logo {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .nav-item {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .nav-item.active {
+            background: linear-gradient(135deg, #00D2BE, #00A896);
+            color: #050505;
+            box-shadow: 0 4px 18px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .hero-banner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(0, 210, 190, 0.35), transparent 55%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        body.theme-dark .season-section {
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        body.theme-dark .season-section::before {
+            background: rgba(5, 5, 5, 0.9);
+        }
+
+        body.theme-dark .season-header {
+            background: rgba(8, 8, 8, 0.9);
+        }
+
+        body.theme-dark .season-description,
+        body.theme-dark .content-paragraph,
+        body.theme-dark .quote {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .stat-card {
+            background: #050505;
+            border-color: rgba(192, 192, 192, 0.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85);
+        }
+
+        body.theme-dark .stat-card-number {
+            color: #f5f5f5;
+        }
+
+        body.theme-dark .sidebar {
+            background: #050505;
+            border-left: 1px solid rgba(192, 192, 192, 0.4);
+        }
+
+        body.theme-dark .sidebar-title {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .season-nav-link {
+            color: #d0d0d0;
+        }
+
+        body.theme-dark .season-nav-link.active {
+            background: #00D1B2;
+            color: #050505;
+        }
+
+        body.theme-dark .tribute-section {
+            background: linear-gradient(135deg, #020202, #101820);
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header-logo:hover {
+            color: #666;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            color: #000;
+            background: rgba(0, 210, 190, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #00D2BE, #00A896);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.3);
+        }
+
+        .nav-item.active:hover {
+            background: linear-gradient(135deg, #00A896, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 190, 0.4);
+        }
+
+        .nav-item:active {
+            transform: translateY(0);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* ========== 音频播放控制按钮 ========== */
+        .audio-control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .audio-control-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .audio-control-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        .audio-control-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(140deg) brightness(98%) contrast(104%);
+        }
+
+        body.theme-dark .audio-control-btn img {
+            filter: brightness(0) saturate(100%) invert(86%) sepia(17%) saturate(1635%) hue-rotate(140deg) brightness(100%) contrast(101%);
+        }
+
+        .audio-control-btn.playing img {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+        }
+
+        /* 隐藏的音频元素 */
+        #background-audio {
+            display: none;
+        }
+
+        .action-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+
+        .action-link:hover {
+            color: #000;
+        }
+
+        /* ========== 主布局 ========== */
+        .main-layout {
+            display: flex;
+            margin-top: 70px;
+        }
+
+        .content-area {
+            flex: 1;
+            max-width: calc(100% - 300px);
+        }
+
+        /* ========== Hero Banner ========== */
+        .hero-banner {
+            position: relative;
+            height: 100vh;
+            background-image: url('Asset/Toto-wallpaper1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00D1B2;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* ========== 赛季章节 ========== */
+        .season-section {
+            padding: 100px 40px;
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .season-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 0;
+        }
+
+        .season-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .season-section:last-child {
+            border-bottom: none;
+        }
+
+        .season-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .season-year {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .season-position {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .season-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #00D1B2;
+            color: white;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .season-tag.leadership {
+            background-color: #3498db;
+        }
+
+        .season-tag.dominance {
+            background-color: #e74c3c;
+        }
+
+        .season-tag.innovation {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+        }
+
+        .season-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .season-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            position: relative;
+            background: #ffffff;
+            border: 2px solid #e8e8e8;
+            padding: 0;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            min-width: 160px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            border-color: #00D1B2;
+        }
+
+        .stat-card-content {
+            padding: 25px 20px;
+            position: relative;
+        }
+
+        .stat-card-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+
+        .stat-card-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* 梅奔经典配色 - 悬停时数字变为品牌色 */
+        .stat-card.wins:hover .stat-card-number,
+        .stat-card.championships:hover .stat-card-number,
+        .stat-card.podiums:hover .stat-card-number {
+            color: #00D1B2;
+        }
+
+        .season-content {
+            margin-top: 50px;
+        }
+
+        .content-paragraph {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555;
+            border-left: 4px solid #00D1B2;
+            padding-left: 20px;
+            margin: 30px 0;
+        }
+
+        .season-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ========== 右侧边栏 ========== */
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            width: 280px;
+            height: calc(100vh - 90px);
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-left: 1px solid #e0e0e0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* 自定义滚动条样式 */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #000;
+            text-align: center;
+        }
+
+        .season-nav {
+            list-style: none;
+        }
+
+        .season-nav-item {
+            margin-bottom: 15px;
+        }
+
+        .season-nav-link {
+            display: block;
+            padding: 12px 15px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .season-nav-link:hover {
+            background: #e9ecef;
+            color: #000;
+        }
+
+        .season-nav-link.active {
+            background: #00D1B2;
+            color: white;
+            font-weight: bold;
+        }
+
+        .season-nav-year {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .season-nav-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 结语区块 ========== */
+        .tribute-section {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .tribute-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tribute-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .tribute-quote {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .tribute-author {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 50px;
+        }
+
+        .tribute-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tribute-btn {
+            padding: 15px 30px;
+            background: #00D1B2;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tribute-btn:hover {
+            background: #00A896;
+            transform: translateY(-2px);
+        }
+
+        /* ========== 响应式设计 ========== */
+        @media (max-width: 1200px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .content-area {
+                max-width: 100%;
+            }
+            
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                order: -1;
+                border-left: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            
+            .season-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .season-nav-item {
+                margin-bottom: 0;
+            }
+            
+            .season-nav-link {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .season-section {
+                padding: 60px 20px;
+                background-attachment: scroll;
+            }
+
+            .season-year {
+                font-size: 2rem;
+            }
+
+            .season-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                min-width: 200px;
+            }
+
+            .tribute-section {
+                padding: 60px 20px;
+            }
+
+            .tribute-title {
+                font-size: 2rem;
+            }
+
+            .tribute-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 顶部导航栏 ========== -->
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+        
+        <nav class="header-nav">
+            <a href="#" class="nav-item" onclick="goToDynasty()">Dynasty History</a>
+            <a href="#" class="nav-item" onclick="goToLewis()">Lewis Hamilton</a>
+            <a href="#" class="nav-item active" onclick="goToToto()">Toto Wolff</a>
+            <a href="#" class="nav-item" onclick="goToGeorge()">George Russell</a>
+            <a href="#" class="nav-item" onclick="goToCar()">Car Evolution</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="audio-control-btn" id="audioControlBtn" title="播放/暂停音乐">
+                <img src="Asset/播放 (1).png" alt="播放/暂停">
+            </button>
+            <button class="theme-toggle-btn" id="themeToggleBtn">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- 背景音乐 -->
+    <audio id="background-audio" loop>
+        <source src="Asset/bensound-tomorrow.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ========== 主布局 ========== -->
+    <div class="main-layout">
+        <!-- 主内容区 -->
+        <div class="content-area">
+            <!-- Hero Banner -->
+            <section class="hero-banner">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Toto Wolff</h1>
+                    <p class="hero-subtitle">The Mercedes Era (2013–Present)</p>
+                    <p class="hero-subtitle">The Visionary Leader Behind Silver Arrows Dominance</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Consecutive Constructors' Titles</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">118</span>
+                            <span class="stat-label">Race Wins</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">126</span>
+                            <span class="stat-label">Pole Positions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">45%</span>
+                            <span class="stat-label">Win Rate</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2013赛季 -->
+            <section id="season-2013" class="season-section" style="background-image: url('Asset/Toto-wallpaper1.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2013</h2>
+                    <p class="season-position">Executive Director</p>
+                    <span class="season-tag">New Beginning</span>
+                    <p class="season-description">Toto Wolff joins Mercedes AMG Petronas F1 Team as Executive Director, bringing his vision and leadership to transform the Silver Arrows into a championship-winning force.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">3</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">2nd</div>
+                            <div class="stat-card-label">Constructors' Position</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">9</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">In January 2013, Toto Wolff made the strategic decision to leave Williams F1 and join Mercedes AMG Petronas Formula One Team as Executive Director. This move would prove to be one of the most significant in Formula 1 history.</p>
+                    
+                    <p class="content-paragraph">Wolff acquired 30% of Mercedes-Benz Grand Prix Ltd, with Niki Lauda holding 10% and the parent company retaining 60%. He took over the coordination of all Mercedes-Benz motorsport activities, a responsibility previously held by Norbert Haug.</p>
+                    
+                    <div class="quote">
+                        "I saw the potential in Mercedes. They had the resources, the engineering excellence, and the determination to succeed. I wanted to be part of building something extraordinary." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2014赛季 -->
+            <section id="season-2014" class="season-section" style="background-image: url('Asset/Toto-wallpaper2.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2014</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">First Championship</span>
+                    <p class="season-description">The hybrid era begins, and under Wolff's leadership, Mercedes secures their first Constructors' Championship, marking the start of an unprecedented era of dominance.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">16</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">31</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">The introduction of V6 turbo hybrid power units marked a new era in Formula 1, and Toto Wolff's strategic vision proved crucial. Mercedes' engineering excellence, combined with Wolff's leadership, created an unstoppable force.</p>
+                    
+                    <p class="content-paragraph">The team achieved a historic 1-2-3-4 finish at the Austrian Grand Prix in Spielberg, Austria - Wolff's 'home race'. This remarkable achievement showcased the team's dominance and Wolff's ability to create a winning culture.</p>
+                    
+                    <div class="quote">
+                        "This is just the beginning. We've built something special here, and I believe we can achieve even greater things together." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2015赛季 -->
+            <section id="season-2015" class="season-section" style="background-image: url('Asset/Toto-wallpaper3.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2015</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Back-to-Back</span>
+                    <p class="season-description">Mercedes secures their second consecutive Constructors' Championship under Wolff's leadership, establishing the Silver Arrows as the dominant force in Formula 1.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">16</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">32</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">Building on the success of 2014, Toto Wolff's leadership continued to drive Mercedes forward. The team's consistency and reliability were unmatched, as they secured victory after victory throughout the season.</p>
+                    
+                    <p class="content-paragraph">Wolff's management style, combining technical expertise with strategic vision, proved instrumental in maintaining the team's competitive edge. His ability to manage the intense rivalry between Lewis Hamilton and Nico Rosberg while keeping the team focused on success was remarkable.</p>
+                </div>
+            </section>
+
+            <!-- 2016赛季 -->
+            <section id="season-2016" class="season-section" style="background-image: url('Asset/Toto-wallpaper1.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2016</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Three in a Row</span>
+                    <p class="season-description">Mercedes achieves their third consecutive Constructors' Championship, with Wolff selling his remaining Williams shares to focus entirely on Mercedes' success.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">19</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">33</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">On March 9, 2016, Wolff sold his remaining shares in the Williams team, demonstrating his complete commitment to Mercedes' success. This decision marked a turning point in his career and the team's development.</p>
+                    
+                    <p class="content-paragraph">The season was defined by the intense rivalry between Lewis Hamilton and Nico Rosberg, but Wolff's leadership ensured that the team remained focused on their collective goals while managing the internal competition effectively.</p>
+                    
+                    <div class="quote">
+                        "I'm fully committed to Mercedes. This is where I want to build something lasting and extraordinary." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2017赛季 -->
+            <section id="season-2017" class="season-section" style="background-image: url('Asset/Toto-wallpaper2.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2017</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Four in a Row</span>
+                    <p class="season-description">Mercedes secures their fourth consecutive Constructors' Championship, with Wolff's leadership proving crucial in maintaining the team's competitive edge against new challengers.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">12</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">26</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">With Nico Rosberg's retirement, Toto Wolff faced new challenges in maintaining Mercedes' dominance. The team faced increased competition from Ferrari, but Wolff's strategic leadership ensured continued success.</p>
+                    
+                    <p class="content-paragraph">Wolff's ability to adapt to changing circumstances and maintain team morale during transitions proved invaluable. His management of the driver lineup and technical team continued to drive Mercedes forward.</p>
+                </div>
+            </section>
+
+            <!-- 2018赛季 -->
+            <section id="season-2018" class="season-section" style="background-image: url('Asset/Toto-wallpaper3.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2018</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Record Year</span>
+                    <p class="season-description">2018 proves to be the most successful motorsport year in Mercedes-Benz history, with Wolff's achievements recognized through prestigious awards.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">11</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">25</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">2018 was a landmark year for Mercedes-Benz motorsport. The company won both F1 titles, the Formula 2 title with George Russell, the Formula 3 European Championship with Mick Schumacher, all three titles in its final season of DTM competition, and both F1 Esports titles.</p>
+                    
+                    <p class="content-paragraph">Wolff's achievements were recognized through the presentation of a John Bolster Award from Jean Todt at the 2018 Autosport Awards. He subsequently received the President's Award from Todt, along with team non-executive chairman Niki Lauda, at the 2018 FIA Prize Giving Gala held in St Petersburg, Russia.</p>
+                    
+                    <div class="quote">
+                        "This recognition means everything. It's not just about winning races - it's about building something that inspires and excites people around the world." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2019赛季 -->
+            <section id="season-2019" class="season-section" style="background-image: url('Asset/Toto-wallpaper1.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2019</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Sixth Consecutive</span>
+                    <p class="season-description">Mercedes continues their unprecedented success by securing a sixth consecutive double world championship, with Wolff becoming the only Team Principal to win more than five consecutive double world championships.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">15</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">32</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">The championship was secured at the Japanese GP, when the team secured the Constructors' title and only one of Lewis Hamilton and Valtteri Bottas could still become Drivers' champion. This is an unprecedented achievement in the history of the sport.</p>
+                    
+                    <p class="content-paragraph">As of 2019, Wolff is the only Team Principal who has won more than five consecutive double world championships, cementing his place in Formula 1 history as one of the greatest team leaders of all time.</p>
+                </div>
+            </section>
+
+            <!-- 2020赛季 -->
+            <section id="season-2020" class="season-section" style="background-image: url('Asset/Toto-wallpaper2.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2020</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Record Seventh</span>
+                    <p class="season-description">Mercedes wins their record seventh consecutive double world championship, surpassing Ferrari's previous record and establishing new benchmarks in Formula 1 history.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">13</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">25</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">In 2020, Mercedes won its record seventh consecutive double world championship. The record was previously held by Ferrari when it won five consecutive double world championships between 2000 and 2004. Mercedes also holds the record of seven consecutive Driver's Championships from 2014 to 2020.</p>
+                    
+                    <p class="content-paragraph">Mercedes' record of seven consecutive Constructor's Championships surpassed that of Ferrari's six consecutive Constructor's Championships set between 1999 and 2004. This achievement marked Wolff's leadership as truly historic.</p>
+                    
+                    <div class="quote">
+                        "Seven consecutive championships - this is beyond anything we could have imagined. It's a testament to the incredible team we've built." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2021赛季 -->
+            <section id="season-2021" class="season-section" style="background-image: url('Asset/Toto-wallpaper3.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2021</h2>
+                    <p class="season-position">1st Place</p>
+                    <span class="season-tag">Eighth Consecutive</span>
+                    <p class="season-description">Mercedes achieves an eighth consecutive constructors' world championship, but narrowly misses out on the drivers' crown after a controversial Abu Dhabi Grand Prix.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">9</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1st</div>
+                            <div class="stat-card-label">Constructors' Title</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">28</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">The team followed up the 2020 achievement with an eighth consecutive constructors' world championship in 2021, but narrowly missed out on the drivers' crown after a controversial Abu Dhabi Grand Prix, in which Max Verstappen edged out Hamilton for the title.</p>
+                    
+                    <p class="content-paragraph">Despite the disappointment, Wolff's leadership ensured that the team maintained their focus and continued to perform at the highest level, securing yet another constructors' championship.</p>
+                </div>
+            </section>
+
+            <!-- 2022-2023赛季 -->
+            <section id="season-2022-2023" class="season-section" style="background-image: url('Asset/Toto-wallpaper1.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2022-2023</h2>
+                    <p class="season-position">3rd Place</p>
+                    <span class="season-tag">New Challenges</span>
+                    <p class="season-description">The introduction of new regulations brings challenges, but Wolff's leadership ensures Mercedes remains competitive while building for the future.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1</div>
+                            <div class="stat-card-label">Race Win</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">3rd</div>
+                            <div class="stat-card-label">Constructors' Position</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">15</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">The introduction of new technical regulations in 2022 brought significant challenges for Mercedes. The team struggled with porpoising issues and had to adapt to the new ground-effect cars.</p>
+                    
+                    <p class="content-paragraph">Despite the difficulties, Wolff's leadership ensured that the team remained focused on recovery and development. His ability to maintain team morale during challenging times proved crucial in keeping Mercedes competitive.</p>
+                    
+                    <div class="quote">
+                        "Every great team faces challenges. What matters is how we respond, how we learn, and how we come back stronger." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2024赛季 -->
+            <section id="season-2024" class="season-section" style="background-image: url('Asset/Toto-wallpaper2.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">2024</h2>
+                    <p class="season-position">Ongoing</p>
+                    <span class="season-tag">New Deal</span>
+                    <p class="season-description">Wolff signs a new three-year deal to stay on as team principal and chief executive, increasing his ownership stake to 33% and becoming equal shareholders with Daimler AG.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1+</div>
+                            <div class="stat-card-label">Race Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">TBD</div>
+                            <div class="stat-card-label">Constructors' Position</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">5+</div>
+                            <div class="stat-card-label">Podiums</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">After the 2023 F1 season, Wolff signed a new three-year deal to stay on as the team principal and chief executive of the Mercedes team. This commitment demonstrates his continued belief in the team's potential and his dedication to Mercedes' future success.</p>
+                    
+                    <p class="content-paragraph">Wolff's net worth is estimated at US$1.6 billion as of 2023, reflecting not only his success in Formula 1 but also his broader business acumen and investment strategies.</p>
+                    
+                    <div class="quote">
+                        "I'm committed to Mercedes for the long term. We have unfinished business, and I believe the best is yet to come." — Toto Wolff
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学术成就 -->
+            <section id="academic-achievements" class="season-section" style="background-image: url('Asset/Toto-wallpaper3.jpg');">
+                <div class="season-header">
+                    <h2 class="season-year">Academic Recognition</h2>
+                    <p class="season-position">2021-2022</p>
+                    <span class="season-tag innovation">Educational Impact</span>
+                    <p class="season-description">Wolff's leadership excellence is recognized by prestigious academic institutions, with his management style becoming the subject of Harvard Business School case studies.</p>
+                </div>
+                
+                <div class="season-stats">
+                    <div class="stat-card wins">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">1</div>
+                            <div class="stat-card-label">Honorary Doctorate</div>
+                        </div>
+                    </div>
+                    <div class="stat-card championships">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">2</div>
+                            <div class="stat-card-label">Years Fellowship</div>
+                        </div>
+                    </div>
+                    <div class="stat-card podiums">
+                        <div class="stat-card-content">
+                            <div class="stat-card-number">Harvard</div>
+                            <div class="stat-card-label">Case Study</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="season-content">
+                    <p class="content-paragraph">In May 2021, Wolff was awarded an Honorary Doctorate from Cranfield University for his services to Motorsport. In November 2021, he was appointed to an Associate Fellowship of the Oxford Saïd Business School for two years to transfer his understanding of high-performance culture, team leadership, and personal effectiveness from the racetracks into the classroom.</p>
+                    
+                    <p class="content-paragraph">In February 2022, Wolff's leadership of the Mercedes-AMG Petronas F1 Team was the subject of a Harvard Business School case study, authored by Anita Elberse. Wolff visited Harvard on March 3, 2022, to teach the case study to MBA students and lead a discussion on high-performance leadership and organisational culture.</p>
+                    
+                    <p class="content-paragraph">In May 2022, Wolff was named as an executive fellow at Harvard Business School, a role in which he serves as guest lecturer alongside Professor Anita Elberse.</p>
+                    
+                    <div class="quote">
+                        "It's really difficult to find a team that has won what is effectively a world championship eight times in a row. Usually complacency sets in, or some other factor makes it impossible for the team to perform at the highest level. We tend to see very short life cycles for teams, but Wolff has kept his team at the top for eight years now. I find that really fascinating." — Professor Anita Elberse, Harvard Business School
+                    </div>
+                </div>
+            </section>
+
+            <!-- 结语/致敬区块 -->
+            <section class="tribute-section">
+                <div class="tribute-content">
+                    <h2 class="tribute-title">A Visionary Leader</h2>
+                    
+                    <p class="tribute-quote">
+                        "Toto Wolff didn't just manage a Formula 1 team — he built a dynasty. His vision, leadership, and unwavering commitment to excellence transformed Mercedes into the most successful team in modern Formula 1 history. Under his guidance, the Silver Arrows achieved unprecedented success, winning eight consecutive constructors' championships and establishing new benchmarks for performance and innovation."
+                    </p>
+                    
+                    <p class="tribute-author">— Formula 1 Community</p>
+                    
+                    <div class="tribute-buttons">
+                        <a href="#" class="tribute-btn" onclick="goToTeam(); return false;">Back to Team</a>
+                        <a href="#" class="tribute-btn" onclick="scrollToTop(); return false;">Return to Top</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 右侧边栏 -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Jump to Era</h3>
+            <ul class="season-nav">
+                <li class="season-nav-item">
+                    <a href="#season-2013" class="season-nav-link">
+                        <span class="season-nav-year">2013</span>
+                        <span class="season-nav-label">New Beginning</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2014" class="season-nav-link">
+                        <span class="season-nav-year">2014</span>
+                        <span class="season-nav-label">First Championship</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2015" class="season-nav-link">
+                        <span class="season-nav-year">2015</span>
+                        <span class="season-nav-label">Back-to-Back</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2016" class="season-nav-link">
+                        <span class="season-nav-year">2016</span>
+                        <span class="season-nav-label">Three in a Row</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2017" class="season-nav-link">
+                        <span class="season-nav-year">2017</span>
+                        <span class="season-nav-label">Four in a Row</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2018" class="season-nav-link">
+                        <span class="season-nav-year">2018</span>
+                        <span class="season-nav-label">Record Year</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2019" class="season-nav-link">
+                        <span class="season-nav-year">2019</span>
+                        <span class="season-nav-label">Sixth Consecutive</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2020" class="season-nav-link">
+                        <span class="season-nav-year">2020</span>
+                        <span class="season-nav-label">Record Seventh</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2021" class="season-nav-link">
+                        <span class="season-nav-year">2021</span>
+                        <span class="season-nav-label">Eighth Consecutive</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2022-2023" class="season-nav-link">
+                        <span class="season-nav-year">2022-2023</span>
+                        <span class="season-nav-label">New Challenges</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#season-2024" class="season-nav-link">
+                        <span class="season-nav-year">2024</span>
+                        <span class="season-nav-label">New Deal</span>
+                    </a>
+                </li>
+                <li class="season-nav-item">
+                    <a href="#academic-achievements" class="season-nav-link">
+                        <span class="season-nav-year">Academic</span>
+                        <span class="season-nav-label">Recognition</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <script>
+        // 主题切换
+        function applyStoredTheme() {
+            try {
+                const stored = localStorage.getItem('siteTheme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.body.classList.add('theme-dark');
+                } else {
+                    document.body.classList.remove('theme-dark');
+                }
+                const btn = document.getElementById('themeToggleBtn');
+                if (btn) {
+                    btn.textContent = document.body.classList.contains('theme-dark') ? 'Light Mode' : 'Dark Mode';
+                }
+            } catch (e) {
+                console.error('Theme apply error:', e);
+            }
+        }
+
+        function initThemeToggle() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('theme-dark');
+                localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+                btn.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+            });
+        }
+
+        // 导航函数
+        function goToLewis() {
+            window.location.href = 'Lewis-Page.html';
+        }
+
+        function goToToto() {
+            window.location.href = 'Toto-Page.html';
+        }
+
+        function goToGeorge() {
+            window.location.href = 'Russel-Page.html';
+        }
+
+        function goToCar() {
+            window.location.href = 'Car-Page.html';
+        }
+
+        function goToDynasty() {
+            window.location.href = 'Dynasty-Page.html';
+        }
+
+        // 返回Team界面
+        function goToTeam() {
+            window.location.href = 'Home-Page.html#team';
+        }
+
+        // 返回页面顶部
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 音频控制功能
+        function initAudioControl() {
+            const audio = document.getElementById('background-audio');
+            const btn = document.getElementById('audioControlBtn');
+            
+            if (!audio || !btn) return;
+
+            // 从sessionStorage恢复音频状态
+            const savedState = sessionStorage.getItem('audioState');
+            const savedTime = sessionStorage.getItem('audioTime');
+            const isHomePage = window.location.pathname.includes('Home-Page');
+            
+            // 如果进入的是音乐页面,自动播放
+            if (!isHomePage) {
+                if (savedState === 'playing' && savedTime) {
+                    // 如果之前有播放状态,恢复播放位置
+                    audio.currentTime = parseFloat(savedTime);
+                }
+                // 自动开始播放
+                audio.play().then(() => {
+                    sessionStorage.setItem('audioState', 'playing');
+                    btn.classList.add('playing');
+                }).catch(e => {
+                    console.log('自动播放被阻止:', e);
+                    // 如果自动播放被阻止,需要用户手动点击
+                });
+            } else {
+                // 如果是首页,停止播放
+                audio.pause();
+                sessionStorage.removeItem('audioState');
+                sessionStorage.removeItem('audioTime');
+            }
+
+            // 按钮点击事件
+            btn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        sessionStorage.setItem('audioState', 'playing');
+                        btn.classList.add('playing');
+                    }).catch(e => {
+                        console.log('播放失败:', e);
+                    });
+                } else {
+                    audio.pause();
+                    sessionStorage.setItem('audioState', 'paused');
+                    btn.classList.remove('playing');
+                }
+            });
+
+            // 定期保存播放时间
+            setInterval(() => {
+                if (!audio.paused) {
+                    sessionStorage.setItem('audioTime', audio.currentTime.toString());
+                    sessionStorage.setItem('audioState', 'playing');
+                }
+            }, 1000);
+
+            // 页面卸载前保存状态
+            window.addEventListener('beforeunload', function() {
+                if (!audio.paused) {
+                    sessionStorage.setItem('audioTime', audio.currentTime.toString());
+                    sessionStorage.setItem('audioState', 'playing');
+                } else {
+                    sessionStorage.setItem('audioState', 'paused');
+                }
+            });
+
+            // 监听音频播放状态
+            audio.addEventListener('play', function() {
+                btn.classList.add('playing');
+                sessionStorage.setItem('audioState', 'playing');
+            });
+
+            audio.addEventListener('pause', function() {
+                btn.classList.remove('playing');
+                sessionStorage.setItem('audioState', 'paused');
+            });
+        }
+
+        // 平滑滚动和边栏高亮功能
+        document.addEventListener('DOMContentLoaded', function() {
+            applyStoredTheme();
+            initThemeToggle();
+            initAudioControl();
+
+            const sidebarLinks = document.querySelectorAll('.season-nav-link');
+            const sections = document.querySelectorAll('.season-section');
+            
+            // 为边栏链接添加点击事件
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // 滚动时更新边栏高亮状态
+            function updateActiveLink() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', updateActiveLink);
+            
+            // 页面加载时设置初始状态
+            updateActiveLink();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes F1 Archive----Silver Legacy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.theme-dark {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-bar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.98));
+            border-bottom: 1px solid rgba(0, 210, 190, 0.6);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .header-logo {
+            background: linear-gradient(135deg, #00D2BE, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.theme-dark .header-nav .nav-item {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-nav .nav-item.active {
+            color: #050505;
+        }
+
+        body.theme-dark .header-nav .nav-item.active::after {
+            background: #00D2BE;
+        }
+
+        body.theme-dark .action-link,
+        body.theme-dark .search-icon,
+        body.theme-dark .login-btn {
+            background: rgba(8, 8, 8, 0.8);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.5);
+        }
+
+        body.theme-dark .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #008f9c);
+            color: #050505;
+        }
+
+        body.theme-dark .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #ffffff;
+        }
+
+        body.theme-dark .main-content {
+            background: radial-gradient(circle at top, rgba(0, 210, 190, 0.08), transparent 55%);
+        }
+
+        body.theme-dark .card {
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .card-overlay {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .card:hover .card-overlay {
+            background: rgba(0, 0, 0, 0.92);
+        }
+
+        body.theme-dark .news-item {
+            background: #101010;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(192, 192, 192, 0.4);
+        }
+
+        body.theme-dark .news-headline {
+            color: #f5f5f5;
+        }
+
+        body.theme-dark .news-category {
+            color: #00D2BE;
+        }
+
+        body.theme-dark .news-meta {
+            color: #b0b0b0;
+        }
+
+        body.theme-dark .gallery-title,
+        body.theme-dark .news-title {
+            background: linear-gradient(135deg, #00D2BE, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.theme-dark .gallery-subtitle,
+        body.theme-dark .news-subtitle {
+            color: #cccccc;
+        }
+
+        body.theme-dark .login-modal .login-content,
+        body.theme-dark .download-success-content {
+            background: #0b0b0b;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-input {
+            background: #050505;
+            border-color: rgba(0, 210, 190, 0.6);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-label {
+            color: #dddddd;
+        }
+
+        .theme-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #2b2b2b);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.3);
+        }
+
+        body.theme-dark .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.85);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        .lang-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lang-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .lang-toggle-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(0, 210, 190, 0.2);
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .header-logo:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: scale(1.05);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 35px;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .nav-item::before {
+            display: none;
+        }
+
+        .nav-item:hover {
+            background: transparent;
+            color: #333;
+            border: none;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .nav-item:active {
+            transform: none;
+        }
+
+        /* 活动状态的导航项 - 添加Mercedes绿色下划线 */
+        .nav-item.active {
+            background: transparent;
+            color: #333;
+            border: none;
+            box-shadow: none;
+            font-weight: 700;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00D2BE;
+            border-radius: 2px;
+        }
+
+        .nav-item.active:hover {
+            background: transparent;
+            transform: none;
+        }
+
+        .dropdown-icon {
+            font-size: 10px;
+            opacity: 0.6;
+            transition: transform 0.3s ease;
+            margin-left: 4px;
+        }
+
+        .nav-item:hover .dropdown-icon {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .action-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 6px 12px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 210, 190, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .action-link:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.2);
+        }
+
+        .search-icon {
+            font-size: 18px;
+            cursor: pointer;
+            color: #333;
+            padding: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 210, 190, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+        }
+
+        .search-icon:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: scale(1.1);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.3);
+        }
+
+        .login-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.2);
+        }
+
+        .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+        }
+
+        .login-btn.logged-in {
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
+        }
+
+        .login-btn.logged-in .login-btn-text {
+            display: inline-block;
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text {
+            opacity: 0;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text::after {
+            content: attr(data-logout-text);
+            position: absolute;
+            left: 0;
+            opacity: 1;
+        }
+
+        .main-content {
+            margin-top: 70px;
+            padding: 40px 40px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+        
+        .card:nth-child(1) {
+            grid-column: span 3;
+        }
+        
+        .card:nth-child(2) {
+            grid-column: span 2;
+        }
+        
+        .card:nth-child(3) {
+            grid-column: span 2;
+        }
+        
+        .card:nth-child(4) {
+            grid-column: span 3;
+        }
+        
+        .card:nth-child(5),
+        .card:nth-child(6) {
+            grid-column: span 2.5;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-background {
+            transform: scale(1.05);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40%;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            color: white;
+            transition: width 0.4s ease, background 0.4s ease;
+        }
+
+        .card:hover .card-overlay {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .card-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .card-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease;
+        }
+
+        .card:hover .card-description {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .card-arrow {
+            position: absolute;
+            right: 30px;
+            bottom: 30px;
+            font-size: 24px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(10px);
+        }
+
+        @media (max-width: 1200px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card:nth-child(1),
+            .card:nth-child(2),
+            .card:nth-child(3),
+            .card:nth-child(4),
+            .card:nth-child(5),
+            .card:nth-child(6) {
+                grid-column: span 1 !important;
+            }
+
+            .card {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .header-nav {
+                display: none; /* 移动端隐藏中间菜单，需要汉堡菜单 */
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .card-overlay {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .card-title {
+                font-size: 22px;
+            }
+        }
+
+        /* ========== 特殊卡片尺寸（可选） ========== */
+        .card-large {
+            height: 600px;
+        }
+
+        @media (max-width: 1200px) {
+            .card-large {
+                height: 400px;
+            }
+        }
+
+        /* ========== 壁纸画廊样式 ========== */
+        .wallpaper-gallery {
+            width: 100%;
+            min-height: calc(100vh - 110px);
+            padding: 20px 0;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .wallpaper-item {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .wallpaper-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .wallpaper-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-image {
+            transform: scale(1.05);
+        }
+
+        .wallpaper-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-overlay {
+            opacity: 1;
+        }
+
+        .wallpaper-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .wallpaper-info {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .wallpaper-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .gallery-title {
+                font-size: 2rem;
+            }
+
+            .gallery-subtitle {
+                font-size: 1rem;
+            }
+
+            .wallpaper-item {
+                height: 180px;
+            }
+
+        }
+
+        /* ========== 照片查看器样式 ========== */
+        .wallpaper-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .wallpaper-viewer.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .viewer-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .viewer-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .viewer-info {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .viewer-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .viewer-details {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .viewer-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .viewer-btn {
+            padding: 12px 30px;
+            border: 2px solid #00D2BE;
+            background: transparent;
+            color: #00D2BE;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .viewer-btn:hover {
+            background: #00D2BE;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.4);
+        }
+
+        .viewer-btn.download-btn {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+        }
+
+        .viewer-btn.download-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        .viewer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .viewer-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00D2BE;
+            color: #00D2BE;
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .viewer-image {
+                max-height: 70vh;
+            }
+
+            .viewer-name {
+                font-size: 1.2rem;
+            }
+
+            .viewer-details {
+                font-size: 0.9rem;
+            }
+
+            .viewer-controls {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .viewer-btn {
+                width: 100%;
+            }
+
+            .viewer-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        /* ========== 下载成功提示界面 ========== */
+        .download-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .download-success-modal.active {
+            display: flex;
+        }
+
+        .download-success-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .download-success-icon {
+            font-size: 48px;
+            color: #00D2BE;
+            margin-bottom: 20px;
+        }
+
+        .download-success-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .download-success-message {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .download-success-btn {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-success-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .download-success-content {
+                padding: 30px 20px;
+            }
+
+            .download-success-title {
+                font-size: 1.2rem;
+            }
+
+            .download-success-message {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== 新闻界面样式 ========== */
+        .news-section {
+            width: 100%;
+            min-height: calc(100vh - 110px);
+            padding: 20px 0;
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .news-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .news-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1200px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .news-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-item .news-image-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .news-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-item:hover .news-image {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: 25px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-category {
+            font-size: 0.8rem;
+            color: #00D2BE;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .news-headline {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .news-excerpt {
+            display: none; /* 隐藏灰色描述文字 */
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .news-date {
+            font-weight: 500;
+        }
+
+        .news-read-more {
+            display: none; /* 隐藏Read More链接，整个卡片可点击 */
+        }
+
+        /* Dynasty History 模块样式 */
+        .dynasty-history-module {
+            margin: 40px 20px;
+            width: calc(100% - 40px);
+        }
+
+        .dynasty-history-module .card {
+            max-width: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .news-title {
+                font-size: 2rem;
+            }
+
+            .news-subtitle {
+                font-size: 1rem;
+            }
+
+            .news-item {
+                margin-bottom: 20px;
+            }
+            
+            .news-image {
+                height: 220px;
+            }
+            
+            .news-headline {
+                font-size: 1.1rem;
+            }
+
+            .dynasty-history-module {
+                margin: 30px 15px;
+                width: calc(100% - 30px);
+            }
+        }
+
+        /* ========== 登录模态框样式 ========== */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        .login-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 210, 190, 0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #00D2BE;
+            box-shadow: 0 0 0 3px rgba(0, 210, 190, 0.1);
+        }
+
+        .login-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .login-error.active {
+            display: block;
+        }
+
+        .login-input.error {
+            border-color: #e74c3c;
+        }
+
+        .login-input.error:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .login-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-submit-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        .login-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: #666;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .login-close:hover {
+            background: rgba(0, 0, 0, 0.2);
+            color: #000;
+        }
+
+        .login-content {
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .login-content {
+                padding: 30px 20px;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .header-nav {
+                margin-left: 0; /* 移动端不移动 */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+
+        <nav class="header-nav">
+            <a href="Home-Page.html" class="nav-item" id="nav-home">Home</a>
+            <a href="Team-Page.html" class="nav-item" id="nav-team">TEAM</a>
+            <a href="Wallpapers-Page.html" class="nav-item" id="nav-wallpapers">Wallpapers</a>
+            <a href="Schedule-Page.html" class="nav-item" id="nav-schedule">Schedule</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="lang-toggle-btn" id="langToggleBtn">中文</button>
+            <button class="theme-toggle-btn" id="themeToggleBtn">Dark Mode</button>
+            <button class="login-btn" id="loginBtn" onclick="handleLoginClick()">
+                <span class="login-btn-text" id="loginBtnText">Login</span>
+            </button>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="card-grid" id="cardGrid" style="display: none;">
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Desktop_LH2.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">DRIVER</div>
+                    <div class="card-title">Lewis Hamilton</div>
+                    <div class="card-description">
+                        Seven-time World Champion and the most successful driver in Formula 1 history.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Toto Wolff 2025 Desktop Wallpaper 3.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">TEAM PRINCIPAL</div>
+                    <div class="card-title">Toto Wolff</div>
+                    <div class="card-description">
+                        The visionary leader behind Mercedes' domination era in Formula 1.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Dutch GP 2025 Desktop Wallpaper 1.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">DRIVER</div>
+                    <div class="card-title">George Russell</div>
+                    <div class="card-description">
+                        The rising star leading Mercedes into a new era of competition.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Gallery-1.webp');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">TECHNOLOGY</div>
+                    <div class="card-title">Car Evolution</div>
+                    <div class="card-description">
+                        Exploring the technical innovations and development of Mercedes racing machines.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="wallpaper-gallery" id="wallpaperGallery" style="display: none;">
+            <div class="gallery-header">
+                <h2 class="gallery-title">Mercedes F1 Wallpaper Gallery</h2>
+                <p class="gallery-subtitle">Premium HD wallpapers showcasing Silver Arrows excellence</p>
+            </div>
+            
+            <div class="wallpaper-grid" id="wallpaperGrid">
+            </div>
+            
+        </div>
+
+        <div class="wallpaper-viewer" id="wallpaperViewer">
+            <div class="viewer-close" id="viewerClose">×</div>
+            <div class="viewer-container">
+                <img class="viewer-image" id="viewerImage" src="" alt="">
+                <div class="viewer-info">
+                    <div class="viewer-name" id="viewerName"></div>
+                    <div class="viewer-details" id="viewerDetails"></div>
+                    <div class="viewer-controls">
+                        <button class="viewer-btn download-btn" id="viewerDownloadBtn">Download</button>
+                        <button class="viewer-btn" id="viewerCloseBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下载成功提示界面 -->
+        <div class="download-success-modal" id="downloadSuccessModal">
+            <div class="download-success-content">
+                <div class="download-success-icon">✓</div>
+                <div class="download-success-title">Download Started</div>
+                <div class="download-success-message">Your wallpaper download has started. Check your downloads folder.</div>
+                <button class="download-success-btn" id="downloadSuccessCloseBtn">Close</button>
+            </div>
+        </div>
+
+        <!-- 登录模态框 -->
+        <div class="login-modal" id="loginModal">
+            <div class="login-content">
+                <button class="login-close" id="loginCloseBtn">×</button>
+                <h2 class="login-title">Login</h2>
+                <form id="loginForm">
+                    <div class="login-form-group">
+                        <label class="login-label" for="username">Username</label>
+                        <input type="text" id="username" class="login-input" placeholder="Enter your username" required>
+                        <div class="login-error" id="usernameError"></div>
+                    </div>
+                    <div class="login-form-group">
+                        <label class="login-label" for="password">Password</label>
+                        <input type="password" id="password" class="login-input" placeholder="Enter your password" required>
+                        <div class="login-error" id="passwordError"></div>
+                    </div>
+                    <button type="submit" class="login-submit-btn">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="news-section" id="newsSection">
+            <div class="news-header">
+                <h2 class="news-title" id="newsTitle"><strong>THE SILVER PULSE</strong></h2>
+                <p class="news-subtitle" id="newsSubtitle"><em>Where legends met, machines roared, and a dynasty was forged.</em></p>
+            </div>
+
+            <div class="dynasty-history-module">
+                <div class="card card-large">
+                    <div class="card-background" style="background-image: url('Asset/Thank You Lewis Desktop Wallpaper 4.jpg');"></div>
+                    <div class="card-overlay">
+                        <div class="card-tag">HERITAGE</div>
+                        <div class="card-title">Dynasty History</div>
+                        <div class="card-description">
+                            Celebrating decades of championship glory and the legendary journey of Mercedes in Formula 1.
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="news-grid" id="newsGrid">
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // ========== 语言切换：英 / 中 ==========
+        const i18n = {
+            en: {
+                'nav-home': 'Home',
+                'nav-team': 'TEAM',
+                'nav-wallpapers': 'Wallpapers',
+                'nav-schedule': 'Schedule',
+                'login-btn': 'Login',
+                'logout-text': 'Logout',
+                'username-error': 'Please enter username',
+                'password-error': 'Please enter password',
+                'news-title': 'THE SILVER PULSE',
+                'news-subtitle': 'Where legends met, machines roared, and a dynasty was forged.',
+                'dark-mode': 'Dark Mode',
+                'light-mode': 'Light Mode',
+                'login-title': 'Login',
+                'username-label': 'Username',
+                'password-label': 'Password',
+                'username-placeholder': 'Enter your username',
+                'password-placeholder': 'Enter your password',
+                'login-submit': 'Login'
+            },
+            zh: {
+                'nav-home': '首页',
+                'nav-team': '车队',
+                'nav-wallpapers': '壁纸',
+                'nav-schedule': '赛程',
+                'login-btn': '登录',
+                'logout-text': '登出',
+                'username-error': '请输入用户名',
+                'password-error': '请输入密码',
+                'news-title': '银色脉搏',
+                'news-subtitle': '传奇在此相遇，赛车在此怒吼，王朝在此铸就。',
+                'dark-mode': '深色模式',
+                'light-mode': '浅色模式',
+                'login-title': '登录',
+                'username-label': '用户名',
+                'password-label': '密码',
+                'username-placeholder': '请输入用户名',
+                'password-placeholder': '请输入密码',
+                'login-submit': '登录'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const dict = i18n[lang] || i18n.en;
+            const setText = (id, key) => {
+                const el = document.getElementById(id);
+                if (el && key in dict) {
+                    if (el.tagName.toLowerCase() === 'button') {
+                        el.textContent = dict[key];
+                    } else {
+                        el.textContent = dict[key];
+                    }
+                }
+            };
+
+            setText('nav-home', 'nav-home');
+            setText('nav-team', 'nav-team');
+            setText('nav-wallpapers', 'nav-wallpapers');
+            setText('nav-schedule', 'nav-schedule');
+            
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtnText && loginBtn && !loginBtn.classList.contains('logged-in')) {
+                loginBtnText.textContent = dict['login-btn'] || 'Login';
+            }
+            
+            if (loginBtnText && loginBtn && loginBtn.classList.contains('logged-in')) {
+                loginBtnText.setAttribute('data-logout-text', dict['logout-text'] || 'Logout');
+            }
+            
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            if (themeToggleBtn) {
+                const isDark = document.body.classList.contains('theme-dark');
+                themeToggleBtn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+            
+            const loginTitle = document.querySelector('.login-title');
+            if (loginTitle) {
+                loginTitle.textContent = dict['login-title'] || 'Login';
+            }
+            
+            const usernameLabel = document.querySelector('label[for="username"]');
+            if (usernameLabel) {
+                usernameLabel.textContent = dict['username-label'] || 'Username';
+            }
+            
+            const passwordLabel = document.querySelector('label[for="password"]');
+            if (passwordLabel) {
+                passwordLabel.textContent = dict['password-label'] || 'Password';
+            }
+            
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) {
+                usernameInput.placeholder = dict['username-placeholder'] || 'Enter your username';
+            }
+            
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.placeholder = dict['password-placeholder'] || 'Enter your password';
+            }
+            
+            const loginSubmitBtn = document.querySelector('.login-submit-btn');
+            if (loginSubmitBtn) {
+                loginSubmitBtn.textContent = dict['login-submit'] || 'Login';
+            }
+            
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+            if (usernameError && 'username-error' in dict) {
+                usernameError.setAttribute('data-text', dict['username-error']);
+            }
+            if (passwordError && 'password-error' in dict) {
+                passwordError.setAttribute('data-text', dict['password-error']);
+            }
+            
+            setText('newsTitle', 'news-title');
+            setText('newsSubtitle', 'news-subtitle');
+
+            const langBtn = document.getElementById('langToggleBtn');
+            if (langBtn) {
+                langBtn.textContent = lang === 'en' ? '中文' : 'EN';
+            }
+        }
+
+        function updateThemeButtonText() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                const dict = i18n[currentLang] || i18n.en;
+                const isDark = document.body.classList.contains('theme-dark');
+                btn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+        }
+
+        function applyStoredTheme() {
+            try {
+                const stored = localStorage.getItem('siteTheme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.body.classList.add('theme-dark');
+                } else {
+                    document.body.classList.remove('theme-dark');
+                }
+                updateThemeButtonText();
+            } catch (e) {
+                console.error('Theme apply error:', e);
+            }
+        }
+
+        function initThemeToggle() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('theme-dark');
+                localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+                updateThemeButtonText();
+            });
+        }
+
+        function applyStoredLanguage() {
+            try {
+                const stored = localStorage.getItem('siteLang') || 'en';
+                applyLanguage(stored);
+            } catch (e) {
+                console.error('Lang apply error:', e);
+                applyLanguage('en');
+            }
+        }
+
+        function initLanguageToggle() {
+            const btn = document.getElementById('langToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const current = localStorage.getItem('siteLang') || 'en';
+                const next = current === 'en' ? 'zh' : 'en';
+                localStorage.setItem('siteLang', next);
+                applyLanguage(next);
+            });
+        }
+
+        const wallpapers = [
+            { name: "Lewis Hamilton", file: "Desktop_LH2.jpg", info: "Seven-time World Champion" },
+            { name: "Toto Wolff", file: "Toto Wolff 2025 Desktop Wallpaper 3.jpg", info: "Team Principal" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 1.jpg", info: "Dutch Grand Prix" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 2.jpg", info: "Dutch Grand Prix" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 3.jpg", info: "Dutch Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 1.jpg", info: "Italian Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 2.jpg", info: "Italian Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 3.jpg", info: "Italian Grand Prix" },
+            { name: "Azerbaijan GP 2025", file: "Azerbaijan GP 2025 Desktop Wallpaper 2.jpg", info: "Azerbaijan Grand Prix" },
+            { name: "Azerbaijan GP 2025", file: "Azerbaijan GP 2025 Desktop Wallpaper 3.jpg", info: "Azerbaijan Grand Prix" },
+            { name: "Canadian GP 2024", file: "Canadian GP 2024 Desktop Wallpaper 1.jpg", info: "Canadian Grand Prix" },
+            { name: "Belgian GP 2025", file: "2025 Belgian GP Desktop Wallpaper 2.jpg", info: "Belgian Grand Prix" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 1.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 2.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 3.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 1.jpg", info: "Monza Black & White" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 2.jpg", info: "Monza Black & White" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 3.jpg", info: "Monza Black & White" },
+            { name: "Retro Desktop", file: "Retro Desktop Wallpaper 1.png", info: "Retro Style" },
+            { name: "Retro Desktop", file: "Retro Desktop Wallpaper 3.png", info: "Retro Style" },
+            { name: "Silver Arrows 2025", file: "Silver Arrows 2025 Desktop Wallpaper 2.jpg", info: "Silver Arrows 2025" },
+            { name: "Sketch Desktop", file: "Sketch Desktop Wallpaper 5.png", info: "Sketch Style" },
+            { name: "Sketch Desktop", file: "Sketch Desktop Wallpaper 6.png", info: "Sketch Style" },
+            { name: "Summer Stripes", file: "Summer Stripes Desktop Wallpaper 2.jpg", info: "Summer Stripes" },
+            { name: "Thank You Lewis", file: "Thank You Lewis Desktop Wallpaper 4.jpg", info: "Thank You Lewis" },
+            { name: "Mercedes-AMG F1", file: "Mercedes-AMG F1 W16 E Performance Desktop Wallpaper 6.png", info: "Mercedes-AMG F1" },
+            { name: "W3 Blueprint", file: "W3 - LH W15 Blueprint.jpg", info: "W15 Blueprint" },
+            { name: "Gallery 1", file: "Gallery-1.webp", info: "Gallery Selection" },
+            { name: "Gallery 3", file: "Gallery-3.webp", info: "Gallery Selection" },
+            { name: "Bio Resin", file: "Bio-Resin-WEB-1.webp", info: "Bio Resin" },
+            { name: "M350989", file: "M350989.jpg", info: "Team Photos" },
+            { name: "M387931", file: "M387931.jpg", info: "Team Photos" },
+            { name: "LH 16x9", file: "LH_16x9.png", info: "Lewis Hamilton 16:9" },
+            { name: "LH 1", file: "LH_1.png", info: "Lewis Hamilton Selection" },
+            { name: "Homepage", file: "首页.webp", info: "Homepage Wallpaper" },
+            { name: "Homepage B&W", file: "首页（黑白）.jpg", info: "Homepage Black & White" }
+        ];
+
+        const newsData = [
+            {
+                id: 'event-1',
+                category: "DRIVER TRANSFER",
+                headline: "Lewis Hamilton Joins Mercedes After McLaren Departure",
+                excerpt: "On December 17, 2012, Lewis Hamilton announced his departure from McLaren after five seasons, signing a three-year contract with Mercedes AMG Petronas. The move marked a new chapter for both the British driver and the German manufacturer, with Hamilton replacing Michael Schumacher as the team's lead driver. This pivotal decision laid the foundation for Mercedes' future dominance in Formula 1.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "December 17, 2012",
+                sortDate: "2012-12-17",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-2',
+                category: "TEAM MANAGEMENT",
+                headline: "Toto Wolff Takes Charge of Mercedes F1 Team",
+                excerpt: "In January 2013, Toto Wolff, an Austrian businessman with a 33% stake in Mercedes, was appointed as Executive Director of the team, replacing Ross Brawn as team principal. This management restructuring was crucial in transforming Mercedes from a mid-field team into a championship contender. Wolff's strategic leadership would become instrumental in the team's future success.",
+                image: "Asset/Toto Wolff 2025 Desktop Wallpaper 3.jpg",
+                date: "January 2013",
+                sortDate: "2013-01-01",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-3',
+                category: "HISTORIC MOMENT",
+                headline: "Mercedes Dominates First Hybrid Era Season",
+                excerpt: "The 2014 season marked F1's transition to 1.6L V6 turbocharged hybrid power units, the most significant regulation change in F1 history. Mercedes capitalized on the new rules with the W05 Hybrid, securing 16 of 19 race wins. Lewis Hamilton claimed his second world title while the team won its first Constructors' Championship since 1955, beginning an era of unprecedented dominance.",
+                image: "Asset/Gallery-1.webp",
+                date: "2014 Season",
+                sortDate: "2014-12-31",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-4',
+                category: "RACE INCIDENT",
+                headline: "Hamilton-Rosberg Collision Shocks Barcelona",
+                excerpt: "During the 2015 Spanish Grand Prix, Mercedes teammates Lewis Hamilton and Nico Rosberg collided on lap 1 while battling for the lead. Both cars spun off track and retired, handing victory to Ferrari's Sebastian Vettel. The incident highlighted the intense intra-team rivalry and prompted Mercedes to implement stricter team orders to prevent future collisions.",
+                image: "Asset/Dutch GP 2025 Desktop Wallpaper 1.jpg",
+                date: "May 10, 2015",
+                sortDate: "2015-05-10",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-5',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Rosberg Claims First World Title in Abu Dhabi",
+                excerpt: "At the 2016 Abu Dhabi Grand Prix finale, Nico Rosberg clinched his first and only World Championship after starting from pole position. Despite Lewis Hamilton winning the race, Rosberg's second-place finish secured the title by five points. The victory made the Rosbergs the second father-son duo (after the Hills) to become F1 World Champions.",
+                image: "Asset/Desktop_3.jpg",
+                date: "November 27, 2016",
+                sortDate: "2016-11-27",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-9',
+                category: "DRIVER RETIREMENT",
+                headline: "Nico Rosberg's Shock Retirement",
+                excerpt: "On December 2, 2016, merely five days after clinching his first Formula 1 World Championship, Nico Rosberg stunned the motorsport world by announcing his immediate retirement. At the FIA Prize Gala in Vienna, the German driver revealed he had achieved his lifelong dream and no longer had the will to continue, wishing to focus on family life. This decision marked the abrupt end of the intense \"Hamilton-Rosberg\" era and forced Mercedes to seek a new driver for the 2017 season.",
+                image: "Asset/Italian GP 2025 Desktop Wallpaper 3.jpg",
+                date: "December 2, 2016",
+                sortDate: "2016-12-02",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-10',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Hamilton's Dominant Return",
+                excerpt: "In the 2017 season, Lewis Hamilton mounted a relentless campaign to reclaim the World Championship. After a fierce battle with Sebastian Vettel's Ferrari, Hamilton and Mercedes emerged supreme after the summer break. A dominant streak through the Asian leg of the season, including consecutive victories in Singapore, Malaysia, and Japan, proved decisive. He sealed his fourth world title with a win at the United States Grand Prix, re-establishing himself as the sport's undisputed leader.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "October 22, 2017",
+                sortDate: "2017-10-22",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-11',
+                category: "CHAMPIONSHIP DECISION",
+                headline: "Hamilton's Destiny-Fulfilling Fifth",
+                excerpt: "The 2018 season saw another epic duel with Sebastian Vettel and Ferrari. The championship momentum swung decisively at the German Grand Prix, where a crash from the lead by Vettel handed Hamilton a stunning victory. From that point, Hamilton displayed supreme consistency and psychological strength, capitalizing on his rival's errors. He secured his fifth World Championship at the Mexican Grand Prix, moving into rarefied air in the sport's history books.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "October 28, 2018",
+                sortDate: "2018-10-28",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-12',
+                category: "HISTORIC ACHIEVEMENT",
+                headline: "Mercedes' Unprecedented Six-Double",
+                excerpt: "The 2019 season cemented the Mercedes dynasty as the most successful in the modern era. Despite a strong start from teammate Valtteri Bottas, Lewis Hamilton's relentless performance throughout the year brought him to the brink of another title. By finishing second at the United States Grand Prix, he secured his sixth World Championship. More importantly, it guaranteed Mercedes an unprecedented sixth consecutive Drivers' and Constructors' Championship double, a feat that solidified their status as one of Formula 1's greatest ever teams.",
+                image: "Asset/Gallery-1.webp",
+                date: "November 3, 2019",
+                sortDate: "2019-11-03",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-6',
+                category: "HISTORIC ACHIEVEMENT",
+                headline: "Hamilton Matches Schumacher's Seven Titles in Turkey",
+                excerpt: "In the 2020 Turkish Grand Prix, Lewis Hamilton secured his seventh World Championship with a stunning drive in challenging wet conditions. The victory tied Michael Schumacher's record of seven world titles. Mercedes' dominance was evident as both Hamilton and Bottas finished in the top two, securing the team's seventh consecutive Constructors' Championship.",
+                image: "Asset/Desktop_LH2.jpg",
+                date: "November 15, 2020",
+                sortDate: "2020-11-15",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-7',
+                category: "TECHNICAL INNOVATION",
+                headline: "W11 Sets New Standard as F1's Most Dominant Car",
+                excerpt: "The Mercedes W11, raced during the 2020 season, became statistically the most dominant F1 car in history. It won 13 of 17 races, achieved 15 pole positions, and set numerous lap records. The car's exceptional performance, particularly in qualifying trim, gave Hamilton and Bottas a significant advantage throughout the season, cementing Mercedes' place in F1 history.",
+                image: "Asset/Gallery-3.webp",
+                date: "2020 Season",
+                sortDate: "2020-12-31",
+                readMore: "Read More"
+            },
+            {
+                id: 'event-8',
+                category: "CHAMPIONSHIP CONTROVERSY",
+                headline: "Abu Dhabi Finale Ends Mercedes' Dominance",
+                excerpt: "The 2021 Abu Dhabi Grand Prix concluded with one of F1's most controversial moments. After a late safety car period, race director Michael Masi allowed only the lapped cars between Hamilton and Verstappen to unlap themselves, setting up a one-lap sprint finish. Verstappen overtook Hamilton on the final lap to win both the race and the championship, ending Mercedes' seven-year dominance of the Drivers' Championship.",
+                image: "Asset/Thank You Lewis Desktop Wallpaper 4.jpg",
+                date: "December 12, 2021",
+                sortDate: "2021-12-12",
+                readMore: "Read More"
+            }
+        ].sort((a, b) => a.sortDate.localeCompare(b.sortDate));
+
+
+        // 更新导航栏活动状态
+        function updateActiveNav(activeId) {
+            // 移除所有活动状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // 添加当前活动状态
+            if (activeId) {
+                const activeNav = document.getElementById(activeId);
+                if (activeNav) {
+                    activeNav.classList.add('active');
+                }
+            }
+        }
+
+        // 显示赛程页面（跳转到 Schedule-Page.html）
+        function showSchedule() {
+            updateActiveNav('nav-schedule');
+            window.location.href = 'Schedule-Page.html';
+        }
+
+        // 显示壁纸画廊（已移至独立页面）
+        function showWallpapers() {
+            window.location.href = 'Wallpapers-Page.html';
+        }
+
+        // 页面加载时显示Home页面（新闻界面）并初始化查看器
+        window.addEventListener('DOMContentLoaded', function() {
+            // 先应用语言，这样主题按钮文本才能正确显示
+            applyStoredLanguage();
+            initLanguageToggle();
+            
+            // 然后应用主题
+            applyStoredTheme();
+            initThemeToggle();
+
+            // 检查URL hash，如果有#team则跳转到TEAM页面
+            if (window.location.hash === '#team') {
+                window.location.href = 'Team-Page.html';
+            } else {
+                showNews();
+            }
+            initWallpaperViewer();
+            initLogin();
+            checkLoginStatus();
+        });
+
+        // 显示Home页面（新闻界面）
+        function showNews() {
+            updateActiveNav('nav-home');
+            document.getElementById('cardGrid').style.display = 'none';
+            document.getElementById('wallpaperGallery').style.display = 'none';
+            document.getElementById('newsSection').style.display = 'block';
+            loadNews();
+        }
+
+        // 显示TEAM页面（已移至独立页面）
+        function showLineup() {
+            window.location.href = 'Team-Page.html';
+        }
+
+        // ========== 登录功能 ==========
+        
+        // 处理登录按钮点击
+        function handleLoginClick() {
+            const username = localStorage.getItem('loggedInUser');
+            if (username) {
+                // 已登录，执行登出
+                logout();
+            } else {
+                // 未登录，打开登录模态框
+                openLoginModal();
+            }
+        }
+
+        // 登出功能
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.textContent = i18n[currentLang]['login-btn'] || 'Login';
+                loginBtnText.removeAttribute('data-logout-text');
+                loginBtn.classList.remove('logged-in');
+            }
+            // 登出后可以打开登录模态框让用户重新登录
+            setTimeout(() => {
+                openLoginModal();
+            }, 100);
+        }
+        
+        // 打开登录模态框
+        function openLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                // 清除之前的错误状态
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                const usernameError = document.getElementById('usernameError');
+                const passwordError = document.getElementById('passwordError');
+                
+                if (usernameInput) usernameInput.classList.remove('error');
+                if (passwordInput) passwordInput.classList.remove('error');
+                if (usernameError) usernameError.classList.remove('active');
+                if (passwordError) passwordError.classList.remove('active');
+                
+                // 清空表单
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) loginForm.reset();
+                
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 关闭登录模态框
+        function closeLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 检查登录状态
+        function checkLoginStatus() {
+            const username = localStorage.getItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (username && loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                // 设置登出文本
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        // 更新登录按钮显示
+        function updateLoginButton(username) {
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                // 设置登出文本
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        // 初始化登录功能
+        function initLogin() {
+            const loginForm = document.getElementById('loginForm');
+            const loginCloseBtn = document.getElementById('loginCloseBtn');
+            const loginModal = document.getElementById('loginModal');
+
+            // 登录表单提交
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const usernameInput = document.getElementById('username');
+                    const passwordInput = document.getElementById('password');
+                    const usernameError = document.getElementById('usernameError');
+                    const passwordError = document.getElementById('passwordError');
+                    
+                    const username = usernameInput.value.trim();
+                    const password = passwordInput.value.trim();
+                    
+                    // 清除之前的错误状态
+                    usernameInput.classList.remove('error');
+                    passwordInput.classList.remove('error');
+                    usernameError.classList.remove('active');
+                    passwordError.classList.remove('active');
+                    
+                    let hasError = false;
+                    
+                    // 验证用户名
+                    if (!username) {
+                        usernameInput.classList.add('error');
+                        usernameError.textContent = 'Please enter username';
+                        usernameError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    // 验证密码
+                    if (!password) {
+                        passwordInput.classList.add('error');
+                        passwordError.textContent = 'Please enter password';
+                        passwordError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    // 如果有错误，不继续登录
+                    if (hasError) {
+                        return;
+                    }
+
+                    // 保存登录状态
+                    localStorage.setItem('loggedInUser', username);
+                    
+                    // 更新按钮显示
+                    updateLoginButton(username);
+                    
+                    // 关闭模态框
+                    closeLoginModal();
+                    
+                    // 清空表单
+                    loginForm.reset();
+                });
+            }
+
+            // 关闭按钮事件
+            if (loginCloseBtn) {
+                loginCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeLoginModal();
+                });
+            }
+
+            // 点击背景关闭模态框
+            if (loginModal) {
+                loginModal.addEventListener('click', function(e) {
+                    if (e.target === loginModal) {
+                        closeLoginModal();
+                    }
+                });
+            }
+
+            // ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const loginModal = document.getElementById('loginModal');
+                    if (loginModal && loginModal.classList.contains('active')) {
+                        closeLoginModal();
+                    }
+                }
+            });
+        }
+
+        // 当前查看的壁纸信息
+        let currentWallpaper = null;
+
+        // 加载壁纸
+        function loadWallpapers() {
+            const wallpaperGrid = document.getElementById('wallpaperGrid');
+            wallpaperGrid.innerHTML = '';
+
+            wallpapers.forEach((wallpaper, index) => {
+                const wallpaperItem = document.createElement('div');
+                wallpaperItem.className = 'wallpaper-item';
+                wallpaperItem.innerHTML = `
+                    <img src="Asset/${wallpaper.file}" alt="${wallpaper.name}" class="wallpaper-image" loading="lazy">
+                    <div class="wallpaper-overlay">
+                        <div class="wallpaper-name">${wallpaper.name}</div>
+                        <div class="wallpaper-info">${wallpaper.info}</div>
+                    </div>
+                `;
+                
+                // 添加点击事件，打开照片查看器
+                wallpaperItem.addEventListener('click', function() {
+                    openWallpaperViewer(wallpaper);
+                });
+                
+                wallpaperGrid.appendChild(wallpaperItem);
+            });
+        }
+
+        // 打开照片查看器
+        function openWallpaperViewer(wallpaper) {
+            currentWallpaper = wallpaper;
+            const viewer = document.getElementById('wallpaperViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const viewerName = document.getElementById('viewerName');
+            const viewerDetails = document.getElementById('viewerDetails');
+
+            viewerImage.src = `Asset/${wallpaper.file}`;
+            viewerName.textContent = wallpaper.name;
+            viewerDetails.textContent = wallpaper.info;
+            
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+
+        // 关闭照片查看器
+        function closeWallpaperViewer() {
+            const viewer = document.getElementById('wallpaperViewer');
+            viewer.classList.remove('active');
+            document.body.style.overflow = ''; // 恢复滚动
+            currentWallpaper = null;
+        }
+
+        // 显示下载成功提示
+        function showDownloadSuccess() {
+            const modal = document.getElementById('downloadSuccessModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        // 关闭下载成功提示
+        function closeDownloadSuccess() {
+            const modal = document.getElementById('downloadSuccessModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // 初始化查看器事件
+        function initWallpaperViewer() {
+            const viewerClose = document.getElementById('viewerClose');
+            const viewerCloseBtn = document.getElementById('viewerCloseBtn');
+            const viewerDownloadBtn = document.getElementById('viewerDownloadBtn');
+            const viewer = document.getElementById('wallpaperViewer');
+            const downloadSuccessCloseBtn = document.getElementById('downloadSuccessCloseBtn');
+
+            // 关闭按钮事件
+            if (viewerClose) {
+                viewerClose.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeWallpaperViewer();
+                });
+            }
+            if (viewerCloseBtn) {
+                viewerCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeWallpaperViewer();
+                });
+            }
+
+            // 下载按钮事件
+            if (viewerDownloadBtn) {
+                viewerDownloadBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡，避免触发背景关闭
+                    if (currentWallpaper) {
+                        downloadWallpaper(currentWallpaper.file, currentWallpaper.name);
+                    }
+                });
+            }
+
+            // 下载成功提示的关闭按钮
+            if (downloadSuccessCloseBtn) {
+                downloadSuccessCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeDownloadSuccess();
+                    closeWallpaperViewer(); // 同时关闭查看器
+                });
+            }
+
+            // 点击背景关闭下载成功提示
+            const downloadSuccessModal = document.getElementById('downloadSuccessModal');
+            if (downloadSuccessModal) {
+                downloadSuccessModal.addEventListener('click', function(e) {
+                    if (e.target === downloadSuccessModal) {
+                        closeDownloadSuccess();
+                        closeWallpaperViewer();
+                    }
+                });
+            }
+
+            // 点击背景关闭查看器
+            if (viewer) {
+                viewer.addEventListener('click', function(e) {
+                    // 如果点击的是查看器本身（不是子元素），则关闭
+                    if (e.target === viewer) {
+                        closeWallpaperViewer();
+                    }
+                });
+            }
+
+            // 防止点击查看器容器时关闭
+            const viewerContainer = document.querySelector('.viewer-container');
+            if (viewerContainer) {
+                viewerContainer.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡到viewer
+                });
+            }
+
+            // ESC键关闭查看器或下载提示
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    const downloadSuccessModal = document.getElementById('downloadSuccessModal');
+                    const viewer = document.getElementById('wallpaperViewer');
+
+                    if (downloadSuccessModal && downloadSuccessModal.classList.contains('active')) {
+                        closeDownloadSuccess();
+                    }
+
+                    if (viewer && viewer.classList.contains('active')) {
+                        closeWallpaperViewer();
+                    }
+                }
+            });
+        }
+
+        // 加载新闻
+        function loadNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            newsGrid.innerHTML = '';
+
+            newsData.forEach((news, index) => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.innerHTML = `
+                    <div class="news-image-container">
+                        <img src="${news.image}" alt="${news.headline}" class="news-image" loading="lazy">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-category">${news.category}</div>
+                        <div class="news-headline">${news.headline}</div>
+                        <div class="news-excerpt">${news.excerpt}</div>
+                        <div class="news-meta">
+                            <span class="news-date">${news.date}</span>
+                        </div>
+                    </div>
+                `;
+                
+                newsItem.addEventListener('click', function() {
+                    window.location.href = `Dynasty-Page.html#${news.id}`;
+                });
+                
+                newsGrid.appendChild(newsItem);
+            });
+        }
+
+        async function downloadWallpaper(filename, name) {
+            try {
+                const downloadBtn = document.getElementById('viewerDownloadBtn');
+                const originalText = downloadBtn.textContent;
+                downloadBtn.textContent = 'Downloading...';
+                downloadBtn.disabled = true;
+
+                const imageUrl = `Asset/${filename}`;
+                
+                const isLocalFile = window.location.protocol === 'file:';
+                
+                if (isLocalFile) {
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    
+                    const link = document.createElement('a');
+                    link.href = imageUrl;
+                    link.download = downloadName;
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // 恢复按钮状态
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                    
+                    // 显示下载成功提示
+                    showDownloadSuccess();
+                    
+                    console.log(`壁纸 "${downloadName}" 下载已启动`);
+                } else {
+                    // 使用fetch获取图片（适用于HTTP/HTTPS）
+                    const response = await fetch(imageUrl);
+                    if (!response.ok) {
+                        throw new Error('下载失败：无法获取图片');
+                    }
+                    
+                    // 转换为blob
+                    const blob = await response.blob();
+                    
+                    // 根据文件扩展名设置下载文件名
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    
+                    // 创建下载链接
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = downloadName;
+                    link.style.display = 'none';
+                    
+                    // 触发下载
+                    document.body.appendChild(link);
+                    link.click();
+                    
+                    // 清理
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                    
+                    // 恢复按钮状态
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                    
+                    // 显示下载成功提示
+                    showDownloadSuccess();
+                    
+                    // 显示成功提示
+                    console.log(`壁纸 "${downloadName}" 下载成功`);
+                }
+            } catch (error) {
+                console.error('下载失败:', error);
+                
+                // 尝试备用方法：直接链接下载
+                try {
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    const imageUrl = `Asset/${filename}`;
+                    
+                    const link = document.createElement('a');
+                    link.href = imageUrl;
+                    link.download = downloadName;
+                    link.target = '_blank';
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // 显示下载成功提示
+                    showDownloadSuccess();
+                    
+                    console.log('已使用备用下载方法');
+                } catch (fallbackError) {
+                    console.error('备用下载方法也失败:', fallbackError);
+                    alert('下载失败，请稍后重试。\n如果问题持续，请右键点击图片选择"另存为"。');
+                }
+                
+                // 恢复按钮状态
+                const downloadBtn = document.getElementById('viewerDownloadBtn');
+                if (downloadBtn) {
+                    downloadBtn.textContent = 'Download';
+                    downloadBtn.disabled = false;
+                }
+            }
+        }
+
+
+        // 为每个卡片添加点击事件 - 根据卡片标题跳转到对应的子页面
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                const cardTitle = this.querySelector('.card-title').textContent;
+                console.log('卡片被点击:', cardTitle);
+                
+                // 根据卡片标题跳转到对应的页面
+                const pageMap = {
+                    'Lewis Hamilton': 'Lewis-Page.html',
+                    'Toto Wolff': 'Toto-Page.html',
+                    'George Russell': 'Russel-Page.html',
+                    'Car Evolution': 'Car-Page.html',
+                    'Dynasty History': 'Dynasty-Page.html'
+                };
+                
+                const targetPage = pageMap[cardTitle];
+                if (targetPage) {
+                    window.location.href = targetPage;
+                } else {
+                    // 如果没有匹配的页面，默认跳转到Dynasty-Page页面
+                    window.location.href = 'Dynasty-Page.html';
+                }
+            });
+        });
+
+        // 可选：添加滚动加载更多内容的逻辑
+        window.addEventListener('scroll', function() {
+            // 检测是否滚动到底部
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                // 这里可以添加加载更多卡片的逻辑
+                console.log('接近页面底部，可以加载更多内容');
+            }
+        });
+    </script>
+</body>
+</html>

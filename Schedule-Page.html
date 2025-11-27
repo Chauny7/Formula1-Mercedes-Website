@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes F1 Schedule Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-image: url('Asset/首页.webp');
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: repeat-x;
+            font-family: 'Arial', sans-serif;
+            transition: background-image 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        /* ========== Cover Button ========== */
+        .cover-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .mercedes-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .mercedes-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .mercedes-button:active {
+            transform: translateY(0);
+        }
+
+        /* ========== Countdown Mode ========== */
+        .countdown-mode {
+            display: none;
+            height: 100vh;
+            background-image: url('Asset/首页（黑白）.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .countdown-mode.show {
+            opacity: 1;
+        }
+
+        .sidebar {
+            width: 320px;
+            height: 100vh;
+            backdrop-filter: blur(10px);
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.6s ease-out;
+        }
+
+        .sidebar.slide-in {
+            transform: translateX(0);
+        }
+
+        .main-content {
+            margin-left: 320px;
+            margin-right: 300px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-out;
+        }
+
+        .main-content.slide-in {
+            transform: translateX(0);
+        }
+
+        /* Right sidebar */
+        .right-sidebar {
+            width: 300px;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+            background: #0b0b0b;
+            color: rgba(127, 255, 212, 0.9);
+            border-left: 2px solid rgba(127, 255, 212, 0.2);
+            padding: 80px 16px 16px 16px;
+            z-index: 20;
+            transform: translateX(100%);
+            transition: transform 0.6s ease-out;
+            overflow-y: auto;
+        }
+
+        .right-sidebar.slide-in {
+            transform: translateX(0);
+        }
+
+        .right-title { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .right-block { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(127,255,212,0.15); }
+        .right-label { opacity: 0.8; font-size: 0.85rem; }
+        .right-value { font-weight: 800; font-size: 1rem; margin-top: 4px; }
+
+        /* Top section: green background, black text */
+        .sidebar-top {
+            background: rgba(127, 255, 212, 0.85);
+            color: #000;
+            padding: 30px 20px 20px 20px;
+            margin: 0;
+            border-radius: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Bottom section: black background, green text */
+        .sidebar-bottom {
+            background: #000;
+            color: rgba(127, 255, 212, 0.85);
+            padding: 20px;
+            margin: 0;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            overflow-y: hidden;
+        }
+
+
+        .f1-countdown-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 90%;
+            width: 600px;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fcfcfc;
+        }
+
+        #next-race-location {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            color: white;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        #next-race-type {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        #next-race-location::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: nowrap;
+            margin-top: 20px;
+        }
+
+        .countdown-item-main {
+            background: none;
+            border: none;
+            padding: 3px 10px;
+            min-width: 70px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 300;
+            color: white;
+            display: block;
+            line-height: 1;
+            margin-bottom: 3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-label-main {
+            font-size: 0.9rem;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            color: white;
+            opacity: 0.9;
+            font-weight: 700;
+        }
+
+        #status {
+            margin-top: 25px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        /* Sidebar content */
+        .sidebar-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-top .section-title::before {
+            content: "•";
+            color: #000;
+            font-weight: bold;
+        }
+
+        .sidebar-bottom .section-title::before {
+            content: "•";
+            color: rgba(127, 255, 212, 0.85);
+            font-weight: bold;
+        }
+
+        .location { font-size: 1.8rem; font-weight: bold; margin: 10px 0; }
+        .current-time { font-size: 1.6rem; font-weight: bold; margin: 15px 0; }
+        .countdown-title { font-size: 1.3rem; font-weight: bold; margin: 15px 0 10px; color: white; }
+
+        .countdown-numbers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+
+        .standings-list {
+            margin-top: 10px;
+        }
+
+        .driver-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .driver-name {
+            font-size: 0.9rem;
+        }
+
+        .driver-points {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .team-info {
+            margin-top: 10px;
+        }
+
+        .team-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .team-label {
+            opacity: 0.8;
+        }
+
+        .team-value {
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: rgba(127, 255, 212, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(127, 255, 212, 0.2);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Schedule Info Styles */
+        .schedule-info {
+            margin-top: 10px;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .schedule-label {
+            opacity: 0.8;
+        }
+
+        .schedule-value {
+            font-weight: bold;
+        }
+
+        /* Upcoming Sessions Styles */
+        .upcoming-sessions {
+            margin-top: 10px;
+        }
+
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(127, 255, 212, 0.1);
+        }
+
+        .session-item:last-child {
+            border-bottom: none;
+        }
+
+        .session-name {
+            font-weight: bold;
+        }
+
+        .session-time {
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+
+        /* Schedule List Styles */
+
+        .schedule-list {
+            margin-top: 10px;
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .race-group {
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(127, 255, 212, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .race-group:last-child {
+            border-bottom: none;
+        }
+
+        .race-location {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: rgba(127, 255, 212, 0.9);
+            cursor: pointer;
+            padding: 5px 0;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .race-location:hover {
+            background: rgba(127, 255, 212, 0.1);
+            padding-left: 8px;
+        }
+
+        .race-location.active {
+            background: rgba(127, 255, 212, 0.2);
+            padding-left: 8px;
+        }
+
+        .race-location.finished {
+            opacity: 0.6;
+            color: rgba(127, 255, 212, 0.5);
+        }
+
+        .session-item.finished {
+            opacity: 0.5;
+            color: rgba(127, 255, 212, 0.4);
+        }
+
+        .session-item.finished:hover {
+            background: rgba(127, 255, 212, 0.05);
+        }
+
+        .session-list {
+            margin-left: 15px;
+        }
+
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(127, 255, 212, 0.1);
+        }
+
+        .session-item:hover {
+            background: rgba(127, 255, 212, 0.1);
+        }
+
+        .session-item.active {
+            background: rgba(127, 255, 212, 0.2);
+            font-weight: bold;
+        }
+
+        .session-name {
+            font-weight: bold;
+        }
+
+        .session-time {
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+
+        /* 隐藏滚动条 */
+        .schedule-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .schedule-list {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(127, 255, 212, 0.8);
+            color: rgba(127, 255, 212, 0.9);
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            background: rgba(127, 255, 212, 0.2);
+            border-color: rgba(127, 255, 212, 1);
+            color: rgba(127, 255, 212, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(127, 255, 212, 0.3);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button::before {
+            content: "←";
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .sidebar { width: 100%; height: auto; position: static; margin-bottom: 20px; }
+            .main-content { margin-left: 0; margin-right: 0; }
+            .countdown-value { font-size: 1.8rem; }
+            
+            .back-button {
+                top: 10px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .right-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover -->
+    <div class="cover-button-container" id="coverContainer">
+        <button class="mercedes-button" onclick="enterCountdownMode()">Check the schedule</button>
+    </div>
+
+    <!-- Countdown Page -->
+    <div class="countdown-mode" id="countdownMode">
+        <!-- 返回按钮 -->
+        <button class="back-button" onclick="goBackToHome()">Back</button>
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Top section: green background, black text -->
+            <div class="sidebar-top">
+                <div class="sidebar-section">
+                    <div class="section-title">Now</div>
+                    <div class="location">Brackley<br>Home</div>
+                    <div class="current-time" id="current-time">--:-- BST</div>
+                </div>
+            </div>
+
+            <!-- Bottom section: black background, green text -->
+            <div class="sidebar-bottom">
+                <div class="sidebar-section">
+                    <div class="section-title">2025 Season Schedule</div>
+                    <div class="schedule-list" id="schedule-list">
+                        <!-- 动态生成赛程列表 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Main Content -->
+        <div class="main-content">
+            <div class="f1-countdown-container">
+                <div class="title">Next Grand Prix</div>
+                <div id="next-race-location">Loading...</div>
+                <div id="next-race-type">Grand Prix</div>
+                <div class="countdown">
+                    <div class="countdown-item-main">
+                        <span id="days" class="countdown-value">--</span>
+                        <span class="countdown-label-main">Days</span>
+                    </div>
+                    <div class="countdown-item-main">
+                        <span id="hours" class="countdown-value">--</span>
+                        <span class="countdown-label-main">Hours</span>
+                    </div>
+                    <div class="countdown-item-main">
+                        <span id="minutes" class="countdown-value">--</span>
+                        <span class="countdown-label-main">Minutes</span>
+                    </div>
+                    <div class="countdown-item-main">
+                        <span id="seconds" class="countdown-value">--</span>
+                        <span class="countdown-label-main">Seconds</span>
+                    </div>
+                </div>
+                <div id="status">Calculating...</div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar" id="rightSidebar">
+            <div class="right-block">
+                <div class="right-title">Selected</div>
+                <div class="right-label">Country</div>
+                <div class="right-value" id="rs-country">—</div>
+            </div>
+            <div class="right-block">
+                <div class="right-label">Session</div>
+                <div class="right-value" id="rs-session">—</div>
+            </div>
+            <div class="right-block">
+                <div class="right-label">Local Time</div>
+                <div class="right-value" id="rs-time">—</div>
+            </div>
+            <div class="right-block">
+                <div class="right-title">Tip</div>
+                <div class="right-label">Click the schedule on the left to switch the countdown target.</div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // 返回主页面
+        function goBackToHome() {
+            window.location.href = 'Home-Page.html';
+        }
+
+        function enterCountdownMode() {
+            document.getElementById('coverContainer').style.display = 'none';
+            setTimeout(() => {
+                document.body.style.backgroundImage = "url('Asset/首页（黑白）.jpg')";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.backgroundRepeat = "no-repeat";
+                
+                const countdownMode = document.getElementById('countdownMode');
+                countdownMode.style.display = 'block';
+                countdownMode.offsetHeight;
+                countdownMode.classList.add('show');
+                
+                setTimeout(() => {
+                    document.querySelector('.sidebar').classList.add('slide-in');
+                    document.querySelector('.main-content').classList.add('slide-in');
+                    document.getElementById('rightSidebar').classList.add('slide-in');
+                    initCountdownFromStaticSchedule();
+                }, 800);
+            }, 500);
+        }
+
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-GB', {
+                timeZone: 'Europe/London',
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('current-time').textContent = timeString + ' BST';
+        }
+
+        function startCountdown(targetDate) {
+            // 清理之前的倒计时定时器
+            if (currentCountdownInterval) {
+                clearInterval(currentCountdownInterval);
+                currentCountdownInterval = null;
+            }
+            
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff <= 0) {
+                    document.querySelector('.countdown').innerHTML = '<div style="font-size: 1.5rem; color: #e10600; text-align: center;">Session in Progress!</div>';
+                    document.getElementById('status').textContent = '🏁 Live Now';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                // 确保DOM元素存在
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                
+                if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+                if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+                if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+                if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateCountdown();
+            currentCountdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // 2025 F1 Schedules
+        const f1Schedule2025 = [
+            // Australia 
+            { country: "Australia", session: "FP1", date: "2025-03-14T09:30:00+08:00" },
+            { country: "Australia", session: "FP2", date: "2025-03-14T13:00:00+08:00" },
+            { country: "Australia", session: "FP3", date: "2025-03-15T09:30:00+08:00" },
+            { country: "Australia", session: "Qualifying", date: "2025-03-15T13:00:00+08:00" },
+            { country: "Australia", session: "Race", date: "2025-03-16T12:00:00+08:00" },
+
+            // China 
+            { country: "China", session: "FP1", date: "2025-03-21T11:30:00+08:00" },
+            { country: "China", session: "FP2", date: "2025-03-21T15:30:00+08:00" },
+            { country: "China", session: "FP3", date: "2025-03-22T11:00:00+08:00" },
+            { country: "China", session: "Qualifying", date: "2025-03-22T15:00:00+08:00" },
+            { country: "China", session: "Race", date: "2025-03-23T15:00:00+08:00" },
+
+            // Japan
+            { country: "Japan", session: "FP1", date: "2025-04-04T10:30:00+08:00" },
+            { country: "Japan", session: "FP2", date: "2025-04-04T14:00:00+08:00" },
+            { country: "Japan", session: "FP3", date: "2025-04-05T10:30:00+08:00" },
+            { country: "Japan", session: "Qualifying", date: "2025-04-05T14:00:00+08:00" },
+            { country: "Japan", session: "Race", date: "2025-04-06T13:00:00+08:00" },
+
+            // Bahrain
+            { country: "Bahrain", session: "FP1", date: "2025-04-11T19:30:00+08:00" },
+            { country: "Bahrain", session: "FP2", date: "2025-04-11T23:00:00+08:00" },
+            { country: "Bahrain", session: "FP3", date: "2025-04-12T20:30:00+08:00" },
+            { country: "Bahrain", session: "Qualifying", date: "2025-04-13T00:00:00+08:00" },
+            { country: "Bahrain", session: "Race", date: "2025-04-13T23:00:00+08:00" },
+
+            // Saudi Arabia
+            { country: "Saudi Arabia", session: "FP1", date: "2025-04-18T21:30:00+08:00" },
+            { country: "Saudi Arabia", session: "FP2", date: "2025-04-19T01:00:00+08:00" },
+            { country: "Saudi Arabia", session: "FP3", date: "2025-04-19T21:30:00+08:00" },
+            { country: "Saudi Arabia", session: "Qualifying", date: "2025-04-20T01:00:00+08:00" },
+            { country: "Saudi Arabia", session: "Race", date: "2025-04-21T01:00:00+08:00" },
+
+            // Miami
+            { country: "Miami", session: "FP1", date: "2025-05-03T00:30:00+08:00" },
+            { country: "Miami", session: "FP2", date: "2025-05-03T04:30:00+08:00" },
+            { country: "Miami", session: "FP3", date: "2025-05-04T00:00:00+08:00" },
+            { country: "Miami", session: "Qualifying", date: "2025-05-04T04:00:00+08:00" },
+            { country: "Miami", session: "Race", date: "2025-05-05T04:00:00+08:00" },
+
+            // Emilia-Romagna
+            { country: "Emilia-Romagna", session: "FP1", date: "2025-05-16T19:30:00+08:00" },
+            { country: "Emilia-Romagna", session: "FP2", date: "2025-05-16T23:00:00+08:00" },
+            { country: "Emilia-Romagna", session: "FP3", date: "2025-05-17T18:30:00+08:00" },
+            { country: "Emilia-Romagna", session: "Qualifying", date: "2025-05-17T22:00:00+08:00" },
+            { country: "Emilia-Romagna", session: "Race", date: "2025-05-18T21:00:00+08:00" },
+
+            // Monaco
+            { country: "Monaco", session: "FP1", date: "2025-05-23T19:30:00+08:00" },
+            { country: "Monaco", session: "FP2", date: "2025-05-23T23:00:00+08:00" },
+            { country: "Monaco", session: "FP3", date: "2025-05-24T18:30:00+08:00" },
+            { country: "Monaco", session: "Qualifying", date: "2025-05-24T22:00:00+08:00" },
+            { country: "Monaco", session: "Race", date: "2025-05-25T21:00:00+08:00" },
+
+            // Spain
+            { country: "Spain", session: "FP1", date: "2025-05-30T19:30:00+08:00" },
+            { country: "Spain", session: "FP2", date: "2025-05-30T23:00:00+08:00" },
+            { country: "Spain", session: "FP3", date: "2025-05-31T18:30:00+08:00" },
+            { country: "Spain", session: "Qualifying", date: "2025-05-31T22:00:00+08:00" },
+            { country: "Spain", session: "Race", date: "2025-06-01T21:00:00+08:00" },
+
+            // Canada
+            { country: "Canada", session: "FP1", date: "2025-06-14T01:30:00+08:00" },
+            { country: "Canada", session: "FP2", date: "2025-06-14T05:00:00+08:00" },
+            { country: "Canada", session: "FP3", date: "2025-06-15T00:30:00+08:00" },
+            { country: "Canada", session: "Qualifying", date: "2025-06-15T04:00:00+08:00" },
+            { country: "Canada", session: "Race", date: "2025-06-16T02:00:00+08:00" },
+
+            // Austria
+            { country: "Austria", session: "FP1", date: "2025-06-27T19:30:00+08:00" },
+            { country: "Austria", session: "FP2", date: "2025-06-27T23:00:00+08:00" },
+            { country: "Austria", session: "FP3", date: "2025-06-28T18:30:00+08:00" },
+            { country: "Austria", session: "Qualifying", date: "2025-06-28T22:00:00+08:00" },
+            { country: "Austria", session: "Race", date: "2025-06-29T21:00:00+08:00" },
+
+            // Great Britain
+            { country: "Great Britain", session: "FP1", date: "2025-07-04T19:30:00+08:00" },
+            { country: "Great Britain", session: "FP2", date: "2025-07-04T23:00:00+08:00" },
+            { country: "Great Britain", session: "FP3", date: "2025-07-05T18:30:00+08:00" },
+            { country: "Great Britain", session: "Qualifying", date: "2025-07-05T22:00:00+08:00" },
+            { country: "Great Britain", session: "Race", date: "2025-07-06T22:00:00+08:00" },
+
+            // Belgium
+            { country: "Belgium", session: "FP1", date: "2025-07-25T18:30:00+08:00" },
+            { country: "Belgium", session: "FP2", date: "2025-07-25T22:30:00+08:00" },
+            { country: "Belgium", session: "FP3", date: "2025-07-26T18:00:00+08:00" },
+            { country: "Belgium", session: "Qualifying", date: "2025-07-26T22:00:00+08:00" },
+            { country: "Belgium", session: "Race", date: "2025-07-27T21:00:00+08:00" },
+
+            // Hungary
+            { country: "Hungary", session: "FP1", date: "2025-08-01T19:30:00+08:00" },
+            { country: "Hungary", session: "FP2", date: "2025-08-01T23:00:00+08:00" },
+            { country: "Hungary", session: "FP3", date: "2025-08-02T18:30:00+08:00" },
+            { country: "Hungary", session: "Qualifying", date: "2025-08-02T22:00:00+08:00" },
+            { country: "Hungary", session: "Race", date: "2025-08-03T21:00:00+08:00" },
+
+            // Netherlands
+            { country: "Netherlands", session: "FP1", date: "2025-08-29T18:30:00+08:00" },
+            { country: "Netherlands", session: "FP2", date: "2025-08-29T22:00:00+08:00" },
+            { country: "Netherlands", session: "FP3", date: "2025-08-30T17:30:00+08:00" },
+            { country: "Netherlands", session: "Qualifying", date: "2025-08-30T21:00:00+08:00" },
+            { country: "Netherlands", session: "Race", date: "2025-08-31T21:00:00+08:00" },
+
+            // Italy
+            { country: "Italy", session: "FP1", date: "2025-09-05T19:30:00+08:00" },
+            { country: "Italy", session: "FP2", date: "2025-09-05T23:00:00+08:00" },
+            { country: "Italy", session: "FP3", date: "2025-09-06T18:30:00+08:00" },
+            { country: "Italy", session: "Qualifying", date: "2025-09-06T22:00:00+08:00" },
+            { country: "Italy", session: "Race", date: "2025-09-07T21:00:00+08:00" },
+
+            // Azerbaijan
+            { country: "Azerbaijan", session: "FP1", date: "2025-09-19T16:30:00+08:00" },
+            { country: "Azerbaijan", session: "FP2", date: "2025-09-19T20:00:00+08:00" },
+            { country: "Azerbaijan", session: "FP3", date: "2025-09-20T16:30:00+08:00" },
+            { country: "Azerbaijan", session: "Qualifying", date: "2025-09-20T20:00:00+08:00" },
+            { country: "Azerbaijan", session: "Race", date: "2025-09-21T19:00:00+08:00" },
+
+            // Singapore
+            { country: "Singapore", session: "FP1", date: "2025-10-03T17:30:00+08:00" },
+            { country: "Singapore", session: "FP2", date: "2025-10-03T21:00:00+08:00" },
+            { country: "Singapore", session: "FP3", date: "2025-10-04T17:30:00+08:00" },
+            { country: "Singapore", session: "Qualifying", date: "2025-10-04T21:00:00+08:00" },
+            { country: "Singapore", session: "Race", date: "2025-10-05T20:00:00+08:00" },
+
+            // United States
+            { country: "United States", session: "FP1", date: "2025-10-18T01:30:00+08:00" },
+            { country: "United States", session: "FP2", date: "2025-10-18T05:30:00+08:00" },
+            { country: "United States", session: "FP3", date: "2025-10-19T01:00:00+08:00" },
+            { country: "United States", session: "Qualifying", date: "2025-10-19T05:00:00+08:00" },
+            { country: "United States", session: "Race", date: "2025-10-20T03:00:00+08:00" },
+
+            // Mexico
+            { country: "Mexico", session: "FP1", date: "2025-10-25T02:30:00+08:00" },
+            { country: "Mexico", session: "FP2", date: "2025-10-25T06:00:00+08:00" },
+            { country: "Mexico", session: "FP3", date: "2025-10-26T01:30:00+08:00" },
+            { country: "Mexico", session: "Qualifying", date: "2025-10-26T05:00:00+08:00" },
+            { country: "Mexico", session: "Race", date: "2025-10-27T04:00:00+08:00" },
+
+            // São Paulo
+            { country: "São Paulo", session: "FP1", date: "2025-11-07T22:30:00+08:00" },
+            { country: "São Paulo", session: "FP2", date: "2025-11-08T02:30:00+08:00" },
+            { country: "São Paulo", session: "FP3", date: "2025-11-08T22:00:00+08:00" },
+            { country: "São Paulo", session: "Qualifying", date: "2025-11-09T02:00:00+08:00" },
+            { country: "São Paulo", session: "Race", date: "2025-11-10T01:00:00+08:00" },
+
+            // Las Vegas
+            { country: "Las Vegas", session: "FP1", date: "2025-11-21T08:30:00+08:00" },
+            { country: "Las Vegas", session: "FP2", date: "2025-11-21T12:00:00+08:00" },
+            { country: "Las Vegas", session: "FP3", date: "2025-11-22T08:30:00+08:00" },
+            { country: "Las Vegas", session: "Qualifying", date: "2025-11-22T12:00:00+08:00" },
+            { country: "Las Vegas", session: "Race", date: "2025-11-23T12:00:00+08:00" },
+
+            // Qatar
+            { country: "Qatar", session: "FP1", date: "2025-11-28T21:30:00+08:00" },
+            { country: "Qatar", session: "FP2", date: "2025-11-29T01:30:00+08:00" },
+            { country: "Qatar", session: "FP3", date: "2025-11-29T22:00:00+08:00" },
+            { country: "Qatar", session: "Qualifying", date: "2025-11-30T02:00:00+08:00" },
+            { country: "Qatar", session: "Race", date: "2025-12-01T00:00:00+08:00" },
+
+            // Abu Dhabi
+            { country: "Abu Dhabi", session: "FP1", date: "2025-12-05T17:30:00+08:00" },
+            { country: "Abu Dhabi", session: "FP2", date: "2025-12-05T21:00:00+08:00" },
+            { country: "Abu Dhabi", session: "FP3", date: "2025-12-06T18:30:00+08:00" },
+            { country: "Abu Dhabi", session: "Qualifying", date: "2025-12-06T22:00:00+08:00" },
+            { country: "Abu Dhabi", session: "Race", date: "2025-12-07T21:00:00+08:00" },
+
+            // 2026年测试比赛 - 用于测试倒计时功能
+            { country: "Test Race 2026", session: "FP1", date: "2026-01-15T10:00:00+08:00" },
+            { country: "Test Race 2026", session: "FP2", date: "2026-01-15T14:00:00+08:00" },
+            { country: "Test Race 2026", session: "FP3", date: "2026-01-16T10:00:00+08:00" },
+            { country: "Test Race 2026", session: "Qualifying", date: "2026-01-16T14:00:00+08:00" },
+            { country: "Test Race 2026", session: "Race", date: "2026-01-17T15:00:00+08:00" }
+        ];
+
+        // 赛道名称映射
+        const circuitNames = {
+            "Australia": "Albert Park Circuit",
+            "China": "Shanghai International Circuit",
+            "Japan": "Suzuka Circuit",
+            "Bahrain": "Bahrain International Circuit",
+            "Saudi Arabia": "Jeddah Corniche Circuit",
+            "Miami": "Miami International Autodrome",
+            "Emilia-Romagna": "Imola Circuit",
+            "Monaco": "Circuit de Monaco",
+            "Spain": "Circuit de Barcelona-Catalunya",
+            "Canada": "Circuit Gilles Villeneuve",
+            "Austria": "Red Bull Ring",
+            "Great Britain": "Silverstone Circuit",
+            "Belgium": "Spa-Francorchamps",
+            "Hungary": "Hungaroring",
+            "Netherlands": "Zandvoort Circuit",
+            "Italy": "Monza Circuit",
+            "Azerbaijan": "Baku City Circuit",
+            "Singapore": "Marina Bay Street Circuit",
+            "United States": "Circuit of the Americas",
+            "Mexico": "Autódromo Hermanos Rodríguez",
+            "São Paulo": "Interlagos Circuit",
+            "Las Vegas": "Las Vegas Strip Circuit",
+            "Qatar": "Lusail International Circuit",
+            "Abu Dhabi": "Yas Marina Circuit"
+        };
+
+
+        // 当前选中的session
+        let currentSelectedSession = null;
+        // 当前倒计时定时器
+        let currentCountdownInterval = null;
+
+        // 生成赛程列表
+        function generateScheduleList() {
+            const scheduleList = document.getElementById('schedule-list');
+            const races = {};
+            const now = new Date();
+            
+            // 按国家分组
+            f1Schedule2025.forEach(session => {
+                if (!races[session.country]) {
+                    races[session.country] = [];
+                }
+                races[session.country].push(session);
+            });
+
+            // 生成HTML
+            let html = '';
+            Object.keys(races).forEach((country) => {
+                const sessions = races[country];
+                const raceDate = new Date(sessions[0].date); // 使用第一个session的日期作为比赛日期
+                const isRaceFinished = raceDate < now;
+                
+                html += `
+                    <div class="race-group" data-country="${country}">
+                        <div class="race-location ${isRaceFinished ? 'finished' : ''}" onclick="selectRace('${country}')">
+                            ${country} ${isRaceFinished ? '(Finished)' : ''}
+                        </div>
+                        <div class="session-list">
+                `;
+                
+                sessions.forEach(session => {
+                    const sessionDate = new Date(session.date);
+                    const isSessionFinished = sessionDate < now;
+                    const timeString = sessionDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric' 
+                    }) + ' ' + sessionDate.toLocaleTimeString('en-US', { 
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    html += `
+                        <div class="session-item ${isSessionFinished ? 'finished' : ''}" onclick="selectSession('${session.country}', '${session.session}', '${session.date}')">
+                            <span class="session-name">${session.session}</span>
+                            <span class="session-time">${timeString}</span>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            scheduleList.innerHTML = html;
+            
+            // 自动滚动到当前或下一个比赛
+            setTimeout(() => {
+                scrollToCurrentRace();
+            }, 100);
+        }
+
+        // 滚动到当前比赛位置
+        function scrollToCurrentRace() {
+            const scheduleList = document.getElementById('schedule-list');
+            const now = new Date();
+            
+            // 找到下一个未完成的比赛
+            let nextRaceElement = null;
+            const raceGroups = scheduleList.querySelectorAll('.race-group');
+            
+            for (let i = 0; i < raceGroups.length; i++) {
+                const raceGroup = raceGroups[i];
+                const country = raceGroup.dataset.country;
+                const sessions = f1Schedule2025.filter(s => s.country === country);
+                
+                if (sessions.length > 0) {
+                    const firstSessionDate = new Date(sessions[0].date);
+                    if (firstSessionDate > now) {
+                        nextRaceElement = raceGroup;
+                        break;
+                    }
+                }
+            }
+            
+            // 如果没有找到未来的比赛，滚动到最后一个比赛
+            if (!nextRaceElement && raceGroups.length > 0) {
+                nextRaceElement = raceGroups[raceGroups.length - 1];
+            }
+            
+            if (nextRaceElement) {
+                nextRaceElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }
+
+        // 选择比赛
+        function selectRace(country) {
+            // 移除所有active状态
+            document.querySelectorAll('.race-location').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.session-item').forEach(el => el.classList.remove('active'));
+            
+            // 添加active状态到选中的比赛
+            event.target.classList.add('active');
+        }
+
+        // 选择具体session
+        function selectSession(country, session, dateString) {
+            const sessionDate = new Date(dateString);
+            const now = new Date();
+            
+            // 移除所有active状态
+            document.querySelectorAll('.race-location').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.session-item').forEach(el => el.classList.remove('active'));
+            
+            // 添加active状态
+            event.target.classList.add('active');
+            
+            // 找到对应的比赛位置并激活
+            const raceLocation = event.target.closest('.race-group').querySelector('.race-location');
+            raceLocation.classList.add('active');
+            
+            // 如果session已结束，显示结束状态
+            if (sessionDate < now) {
+                document.getElementById('next-race-location').textContent = country;
+                document.getElementById('next-race-type').textContent = session;
+                document.getElementById('status').textContent = 'Session Finished';
+                
+                // 清理倒计时定时器
+                if (currentCountdownInterval) {
+                    clearInterval(currentCountdownInterval);
+                    currentCountdownInterval = null;
+                }
+                
+                // 显示结束状态
+                document.querySelector('.countdown').innerHTML = '<div style="font-size: 1.5rem; color: #666; text-align: center;">Session Finished</div>';
+            } else {
+                // 恢复倒计时显示结构
+                restoreCountdownStructure();
+                // 更新倒计时
+                updateCountdownDisplay(country, session, sessionDate);
+            }
+        }
+
+        // 恢复倒计时显示结构
+        function restoreCountdownStructure() {
+            const countdownContainer = document.querySelector('.countdown');
+            countdownContainer.innerHTML = `
+                <div class="countdown-item-main">
+                    <span id="days" class="countdown-value">--</span>
+                    <span class="countdown-label-main">Days</span>
+                </div>
+                <div class="countdown-item-main">
+                    <span id="hours" class="countdown-value">--</span>
+                    <span class="countdown-label-main">Hours</span>
+                </div>
+                <div class="countdown-item-main">
+                    <span id="minutes" class="countdown-value">--</span>
+                    <span class="countdown-label-main">Minutes</span>
+                </div>
+                <div class="countdown-item-main">
+                    <span id="seconds" class="countdown-value">--</span>
+                    <span class="countdown-label-main">Seconds</span>
+                </div>
+            `;
+        }
+
+        // 更新倒计时显示
+        function updateCountdownDisplay(country, session, sessionDate) {
+            currentSelectedSession = { country, session, date: sessionDate };
+            
+            document.getElementById('next-race-location').textContent = country;
+            document.getElementById('next-race-type').textContent = session;
+            
+            const timeString = sessionDate.toLocaleString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit'
+            });
+            document.getElementById('status').textContent = `Session Time: ${timeString}`;
+            // 更新右侧边栏
+            const rsCountry = document.getElementById('rs-country');
+            const rsSession = document.getElementById('rs-session');
+            const rsTime = document.getElementById('rs-time');
+            if (rsCountry) rsCountry.textContent = country;
+            if (rsSession) rsSession.textContent = session;
+            if (rsTime) rsTime.textContent = timeString;
+            
+            // 启动倒计时
+            startCountdown(sessionDate);
+        }
+
+        async function initCountdownFromStaticSchedule() {
+            updateCurrentTime();
+            setInterval(updateCurrentTime, 1000);
+
+            // 生成赛程列表
+            generateScheduleList();
+
+            try {
+                const now = new Date();
+
+                // 找到下一个即将到来的 Session
+                let nextSession = null;
+                for (const session of f1Schedule2025) {
+                    const sessionDate = new Date(session.date);
+                    if (sessionDate > now) {
+                        nextSession = session;
+                        break;
+                    }
+                }
+
+                if (!nextSession) {
+                    document.getElementById('next-race-location').textContent = 'Season Ended';
+                    document.getElementById('next-race-type').textContent = '';
+                    document.getElementById('status').textContent = 'Looking forward to 2026 season';
+                    return;
+                }
+
+                // 默认显示下一个即将到来的session
+                const sessionDate = new Date(nextSession.date);
+                updateCountdownDisplay(nextSession.country, nextSession.session, sessionDate);
+
+            } catch (error) {
+                console.error('Failed to load schedule:', error);
+                document.getElementById('next-race-location').textContent = 'Error Loading Data';
+                document.getElementById('next-race-type').textContent = '';
+                document.getElementById('status').textContent = 'Please check console for details';
+            }
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes F1 Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ========== 全局暗色主题（黑 / PETRONAS 青绿色 / 银色） ========== */
+        body.theme-dark {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-bar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.98));
+            border-bottom: 1px solid rgba(0, 210, 190, 0.6);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .header-logo {
+            background: linear-gradient(135deg, #00D2BE, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.theme-dark .header-nav .nav-item {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-nav .nav-item.active {
+            color: #050505;
+        }
+
+        body.theme-dark .header-nav .nav-item.active::after {
+            background: #00D2BE;
+        }
+
+        body.theme-dark .card {
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .card-overlay {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .card:hover .card-overlay {
+            background: rgba(0, 0, 0, 0.92);
+        }
+
+        body.theme-dark .login-btn {
+            background: rgba(8, 8, 8, 0.8);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #008f9c);
+            color: #050505;
+        }
+
+        body.theme-dark .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #ffffff;
+        }
+
+        /* 主题切换按钮样式 */
+        .theme-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #2b2b2b);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.3);
+        }
+
+        body.theme-dark .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.85);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* 语言切换按钮样式 */
+        .lang-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lang-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .lang-toggle-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* Login按钮样式 */
+        .login-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.2);
+        }
+
+        .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
+        }
+
+        .login-btn.logged-in .login-btn-text {
+            display: inline-block;
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text {
+            opacity: 0;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text::after {
+            content: attr(data-logout-text);
+            position: absolute;
+            left: 0;
+            opacity: 1;
+        }
+
+        /* 登录模态框样式 */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .login-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        body.theme-dark .login-content {
+            background: #0b0b0b;
+            color: #e5e5e5;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        body.theme-dark .login-title {
+            color: #f5f5f5;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        body.theme-dark .login-label {
+            color: #e5e5e5;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 210, 190, 0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        body.theme-dark .login-input {
+            background: #1a1a1a;
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.5);
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #00D2BE;
+            box-shadow: 0 0 0 3px rgba(0, 210, 190, 0.1);
+        }
+
+        .login-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .login-error.active {
+            display: block;
+        }
+
+        .login-input.error {
+            border-color: #e74c3c;
+        }
+
+        .login-input.error:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .login-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-submit-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        .login-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: #666;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .login-close:hover {
+            background: rgba(0, 0, 0, 0.2);
+            color: #000;
+        }
+
+        body.theme-dark .login-close {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #00D2BE;
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(0, 210, 190, 0.2);
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-logo:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: scale(1.05);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 35px;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .nav-item:hover {
+            background: transparent;
+            color: #333;
+        }
+
+        .nav-item.active {
+            font-weight: 700;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00D2BE;
+            border-radius: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* ========== 主体内容区 ========== */
+        .main-content {
+            margin-top: 70px;
+            padding: 40px 40px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 卡片网格容器 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+        
+        .card:nth-child(1) {
+            grid-column: span 3;
+        }
+        
+        .card:nth-child(2) {
+            grid-column: span 2;
+        }
+        
+        .card:nth-child(3) {
+            grid-column: span 2;
+        }
+        
+        .card:nth-child(4) {
+            grid-column: span 3;
+        }
+
+        /* ========== 卡片通用结构 ========== */
+        .card {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-background {
+            transform: scale(1.05);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40%;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            color: white;
+            transition: width 0.4s ease, background 0.4s ease;
+        }
+
+        .card:hover .card-overlay {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .card-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .card-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease;
+        }
+
+        .card:hover .card-description {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .card-arrow {
+            position: absolute;
+            right: 30px;
+            bottom: 30px;
+            font-size: 24px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(10px);
+        }
+
+        /* ========== 响应式设计 ========== */
+        @media (max-width: 1200px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card:nth-child(1),
+            .card:nth-child(2),
+            .card:nth-child(3),
+            .card:nth-child(4) {
+                grid-column: span 1 !important;
+            }
+
+            .card {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .card-overlay {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .card-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 顶部导航栏 ========== -->
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+        
+        <nav class="header-nav">
+            <a href="Home-Page.html" class="nav-item" id="nav-home">Home</a>
+            <a href="Team-Page.html" class="nav-item active" id="nav-team">TEAM</a>
+            <a href="Wallpapers-Page.html" class="nav-item" id="nav-wallpapers">Wallpapers</a>
+            <a href="Schedule-Page.html" class="nav-item" id="nav-schedule">Schedule</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="lang-toggle-btn" id="langToggleBtn">中文</button>
+            <button class="theme-toggle-btn" id="themeToggleBtn">Dark Mode</button>
+            <button class="login-btn" id="loginBtn" onclick="handleLoginClick()">
+                <span class="login-btn-text" id="loginBtnText">Login</span>
+            </button>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <!-- TEAM 卡片网格界面 -->
+        <div class="card-grid">
+            <!-- 卡片 1 -->
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Desktop_LH2.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">DRIVER</div>
+                    <div class="card-title">Lewis Hamilton</div>
+                    <div class="card-description">
+                        Seven-time World Champion and the most successful driver in Formula 1 history.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <!-- 卡片 2 -->
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Toto Wolff 2025 Desktop Wallpaper 3.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">TEAM PRINCIPAL</div>
+                    <div class="card-title">Toto Wolff</div>
+                    <div class="card-description">
+                        The visionary leader behind Mercedes' domination era in Formula 1.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <!-- 卡片 3 -->
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Dutch GP 2025 Desktop Wallpaper 2.jpg');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">DRIVER</div>
+                    <div class="card-title">George Russell</div>
+                    <div class="card-description">
+                        The rising star leading Mercedes into a new era of competition.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+
+            <!-- 卡片 4 -->
+            <div class="card">
+                <div class="card-background" style="background-image: url('Asset/Gallery-1.webp');"></div>
+                <div class="card-overlay">
+                    <div class="card-tag">TECHNOLOGY</div>
+                    <div class="card-title">Car Evolution</div>
+                    <div class="card-description">
+                        Exploring the technical innovations and development of Mercedes racing machines.
+                    </div>
+                    <div class="card-arrow">→</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 登录模态框 -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <button class="login-close" id="loginCloseBtn">×</button>
+            <h2 class="login-title">Login</h2>
+            <form id="loginForm">
+                <div class="login-form-group">
+                    <label class="login-label" for="username">Username</label>
+                    <input type="text" id="username" class="login-input" placeholder="Enter your username" required>
+                    <div class="login-error" id="usernameError"></div>
+                </div>
+                <div class="login-form-group">
+                    <label class="login-label" for="password">Password</label>
+                    <input type="password" id="password" class="login-input" placeholder="Enter your password" required>
+                    <div class="login-error" id="passwordError"></div>
+                </div>
+                <button type="submit" class="login-submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========== 语言切换：英 / 中 ==========
+        const i18n = {
+            en: {
+                'nav-home': 'Home',
+                'nav-team': 'TEAM',
+                'nav-wallpapers': 'Wallpapers',
+                'nav-schedule': 'Schedule',
+                'login-btn': 'Login',
+                'logout-text': 'Logout',
+                'username-error': 'Please enter username',
+                'password-error': 'Please enter password',
+                'dark-mode': 'Dark Mode',
+                'light-mode': 'Light Mode',
+                'login-title': 'Login',
+                'username-label': 'Username',
+                'password-label': 'Password',
+                'username-placeholder': 'Enter your username',
+                'password-placeholder': 'Enter your password',
+                'login-submit': 'Login'
+            },
+            zh: {
+                'nav-home': '首页',
+                'nav-team': '车队',
+                'nav-wallpapers': '壁纸',
+                'nav-schedule': '赛程',
+                'login-btn': '登录',
+                'logout-text': '登出',
+                'username-error': '请输入用户名',
+                'password-error': '请输入密码',
+                'dark-mode': '深色模式',
+                'light-mode': '浅色模式',
+                'login-title': '登录',
+                'username-label': '用户名',
+                'password-label': '密码',
+                'username-placeholder': '请输入用户名',
+                'password-placeholder': '请输入密码',
+                'login-submit': '登录'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const dict = i18n[lang] || i18n.en;
+            const setText = (id, key) => {
+                const el = document.getElementById(id);
+                if (el && key in dict) {
+                    el.textContent = dict[key];
+                }
+            };
+
+            setText('nav-home', 'nav-home');
+            setText('nav-team', 'nav-team');
+            setText('nav-wallpapers', 'nav-wallpapers');
+            setText('nav-schedule', 'nav-schedule');
+            
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtnText && loginBtn && !loginBtn.classList.contains('logged-in')) {
+                loginBtnText.textContent = dict['login-btn'] || 'Login';
+            }
+            
+            if (loginBtnText && loginBtn && loginBtn.classList.contains('logged-in')) {
+                loginBtnText.setAttribute('data-logout-text', dict['logout-text'] || 'Logout');
+            }
+            
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            if (themeToggleBtn) {
+                const isDark = document.body.classList.contains('theme-dark');
+                themeToggleBtn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+            
+            const loginTitle = document.querySelector('.login-title');
+            if (loginTitle) {
+                loginTitle.textContent = dict['login-title'] || 'Login';
+            }
+            
+            const usernameLabel = document.querySelector('label[for="username"]');
+            if (usernameLabel) {
+                usernameLabel.textContent = dict['username-label'] || 'Username';
+            }
+            
+            const passwordLabel = document.querySelector('label[for="password"]');
+            if (passwordLabel) {
+                passwordLabel.textContent = dict['password-label'] || 'Password';
+            }
+            
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) {
+                usernameInput.placeholder = dict['username-placeholder'] || 'Enter your username';
+            }
+            
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.placeholder = dict['password-placeholder'] || 'Enter your password';
+            }
+            
+            const loginSubmitBtn = document.querySelector('.login-submit-btn');
+            if (loginSubmitBtn) {
+                loginSubmitBtn.textContent = dict['login-submit'] || 'Login';
+            }
+            
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+            if (usernameError && 'username-error' in dict) {
+                usernameError.setAttribute('data-text', dict['username-error']);
+            }
+            if (passwordError && 'password-error' in dict) {
+                passwordError.setAttribute('data-text', dict['password-error']);
+            }
+
+            const langBtn = document.getElementById('langToggleBtn');
+            if (langBtn) {
+                langBtn.textContent = lang === 'en' ? '中文' : 'EN';
+            }
+        }
+
+        function applyStoredLanguage() {
+            try {
+                const stored = localStorage.getItem('siteLang') || 'en';
+                applyLanguage(stored);
+            } catch (e) {
+                console.error('Lang apply error:', e);
+                applyLanguage('en');
+            }
+        }
+
+        function initLanguageToggle() {
+            const btn = document.getElementById('langToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const current = localStorage.getItem('siteLang') || 'en';
+                const next = current === 'en' ? 'zh' : 'en';
+                localStorage.setItem('siteLang', next);
+                applyLanguage(next);
+            });
+        }
+
+        // ========== 登录功能 ==========
+        function handleLoginClick() {
+            const username = localStorage.getItem('loggedInUser');
+            if (username) {
+                logout();
+            } else {
+                openLoginModal();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.textContent = i18n[currentLang]['login-btn'] || 'Login';
+                loginBtnText.removeAttribute('data-logout-text');
+                loginBtn.classList.remove('logged-in');
+            }
+            setTimeout(() => {
+                openLoginModal();
+            }, 100);
+        }
+        
+        function openLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                const usernameError = document.getElementById('usernameError');
+                const passwordError = document.getElementById('passwordError');
+                
+                if (usernameInput) usernameInput.classList.remove('error');
+                if (passwordInput) passwordInput.classList.remove('error');
+                if (usernameError) usernameError.classList.remove('active');
+                if (passwordError) passwordError.classList.remove('active');
+                
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) loginForm.reset();
+                
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (username && loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        function updateLoginButton(username) {
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        function initLogin() {
+            const loginForm = document.getElementById('loginForm');
+            const loginCloseBtn = document.getElementById('loginCloseBtn');
+            const loginModal = document.getElementById('loginModal');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const usernameInput = document.getElementById('username');
+                    const passwordInput = document.getElementById('password');
+                    const usernameError = document.getElementById('usernameError');
+                    const passwordError = document.getElementById('passwordError');
+                    
+                    const username = usernameInput.value.trim();
+                    const password = passwordInput.value.trim();
+                    
+                    usernameInput.classList.remove('error');
+                    passwordInput.classList.remove('error');
+                    usernameError.classList.remove('active');
+                    passwordError.classList.remove('active');
+                    
+                    let hasError = false;
+                    
+                    if (!username) {
+                        usernameInput.classList.add('error');
+                        const currentLang = localStorage.getItem('siteLang') || 'en';
+                        usernameError.textContent = i18n[currentLang]['username-error'] || 'Please enter username';
+                        usernameError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    if (!password) {
+                        passwordInput.classList.add('error');
+                        const currentLang = localStorage.getItem('siteLang') || 'en';
+                        passwordError.textContent = i18n[currentLang]['password-error'] || 'Please enter password';
+                        passwordError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    if (hasError) {
+                        return;
+                    }
+
+                    localStorage.setItem('loggedInUser', username);
+                    updateLoginButton(username);
+                    closeLoginModal();
+                    loginForm.reset();
+                });
+            }
+
+            if (loginCloseBtn) {
+                loginCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeLoginModal();
+                });
+            }
+
+            if (loginModal) {
+                loginModal.addEventListener('click', function(e) {
+                    if (e.target === loginModal) {
+                        closeLoginModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const loginModal = document.getElementById('loginModal');
+                    if (loginModal && loginModal.classList.contains('active')) {
+                        closeLoginModal();
+                    }
+                }
+            });
+        }
+
+        // ========== 主题切换：读取与应用 ==========
+        function updateThemeButtonText() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                const dict = i18n[currentLang] || i18n.en;
+                const isDark = document.body.classList.contains('theme-dark');
+                btn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+        }
+        function applyStoredTheme() {
+            try {
+                const stored = localStorage.getItem('siteTheme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.body.classList.add('theme-dark');
+                } else {
+                    document.body.classList.remove('theme-dark');
+                }
+                updateThemeButtonText();
+            } catch (e) {
+                console.error('Theme apply error:', e);
+            }
+        }
+
+        function initThemeToggle() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('theme-dark');
+                localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+                updateThemeButtonText();
+            });
+        }
+
+        // 为每个卡片添加点击事件 - 根据卡片标题跳转到对应的子页面
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                const cardTitle = this.querySelector('.card-title').textContent;
+                
+                const pageMap = {
+                    'Lewis Hamilton': 'Lewis-Page.html',
+                    'Toto Wolff': 'Toto-Page.html',
+                    'George Russell': 'Russel-Page.html',
+                    'Car Evolution': 'Car-Page.html',
+                    'Dynasty History': 'Dynasty-Page.html'
+                };
+                
+                const targetPage = pageMap[cardTitle];
+                if (targetPage) {
+                    window.location.href = targetPage;
+                } else {
+                    window.location.href = 'Dynasty-Page.html';
+                }
+            });
+        });
+
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            applyStoredLanguage();
+            initLanguageToggle();
+            applyStoredTheme();
+            initThemeToggle();
+            initLogin();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
+
