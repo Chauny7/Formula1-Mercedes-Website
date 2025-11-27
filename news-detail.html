@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻详情 - MERCEDES F1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(0, 210, 190, 0.2);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-logo:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.3);
+        }
+
+        .language-toggle {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .language-toggle:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.3);
+        }
+
+        /* ========== 文章内容区 ========== */
+        .article-container {
+            margin-top: 70px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px 20px;
+        }
+
+        .article-header {
+            margin-bottom: 40px;
+        }
+
+        .article-category {
+            font-size: 0.85rem;
+            color: #00D2BE;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .article-date {
+            font-weight: 500;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .article-text {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .article-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .article-container {
+                padding: 30px 15px;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-image {
+                height: 300px;
+            }
+
+            .article-content {
+                padding: 25px;
+            }
+
+            .article-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 顶部导航栏 ========== -->
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+        <div class="header-right">
+            <button class="language-toggle" id="languageToggle">中文</button>
+            <a href="Home-Page.html" class="back-button">
+                <span>←</span> <span id="backText">Back to Home</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ========== 文章内容区 ========== -->
+    <div class="article-container">
+        <div class="article-header">
+            <div class="article-category" id="articleCategory"></div>
+            <h1 class="article-title" id="articleTitle"></h1>
+            <div class="article-meta">
+                <span class="article-date" id="articleDate"></span>
+            </div>
+        </div>
+
+        <img id="articleImage" class="article-image" src="" alt="">
+
+        <div class="article-content">
+            <div class="article-text" id="articleContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // 语言数据
+        const translations = {
+            en: {
+                back: 'Back to Home',
+                toggle: '中文',
+                category: {
+                    'RACE REPORT': 'RACE REPORT',
+                    'TEAM NEWS': 'TEAM NEWS',
+                    'DRIVER UPDATE': 'DRIVER UPDATE',
+                    'TECHNICAL': 'TECHNICAL'
+                }
+            },
+            zh: {
+                back: '返回首页',
+                toggle: 'English',
+                category: {
+                    'RACE REPORT': '比赛报道',
+                    'TEAM NEWS': '车队新闻',
+                    'DRIVER UPDATE': '车手动态',
+                    'TECHNICAL': '技术资讯'
+                }
+            }
+        };
+
+        // 获取当前语言，默认为英文
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        // 从localStorage获取新闻数据
+        window.addEventListener('DOMContentLoaded', function() {
+            const newsDetailStr = localStorage.getItem('newsDetail');
+            
+            if (!newsDetailStr) {
+                // 如果没有数据，返回首页
+                window.location.href = 'Home-Page.html';
+                return;
+            }
+
+            const news = JSON.parse(newsDetailStr);
+            
+            // 初始化语言
+            updateLanguage(currentLang, news);
+            
+            // 语言切换按钮事件
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                currentLang = currentLang === 'en' ? 'zh' : 'en';
+                localStorage.setItem('language', currentLang);
+                updateLanguage(currentLang, news);
+            });
+        });
+
+        function updateLanguage(lang, news) {
+            // 更新按钮文本
+            document.getElementById('languageToggle').textContent = translations[lang].toggle;
+            document.getElementById('backText').textContent = translations[lang].back;
+            
+            // 更新文章内容
+            if (news[`category_${lang}`]) {
+                document.getElementById('articleCategory').textContent = news[`category_${lang}`];
+            } else {
+                // 如果没有翻译版本，使用原始分类并翻译
+                const categoryKey = news.category || 'TEAM NEWS';
+                document.getElementById('articleCategory').textContent = translations[lang].category[categoryKey] || news.category;
+            }
+            
+            if (news[`headline_${lang}`]) {
+                document.getElementById('articleTitle').textContent = news[`headline_${lang}`];
+            } else {
+                document.getElementById('articleTitle').textContent = news.headline;
+            }
+            
+            if (news[`date_${lang}`]) {
+                document.getElementById('articleDate').textContent = news[`date_${lang}`];
+            } else {
+                document.getElementById('articleDate').textContent = news.date;
+            }
+            
+            document.getElementById('articleImage').src = news.image;
+            document.getElementById('articleImage').alt = news[`headline_${lang}`] || news.headline;
+            
+            // 更新文章内容
+            let content = '';
+            if (news[`excerpt_${lang}`]) {
+                content = news[`excerpt_${lang}`];
+            } else if (news[`content_${lang}`]) {
+                content = news[`content_${lang}`];
+            } else {
+                content = news.excerpt || news.content || '';
+            }
+            
+            const paragraphs = content.split('. ').filter(p => p.trim().length > 0);
+            
+            const contentDiv = document.getElementById('articleContent');
+            contentDiv.innerHTML = '';
+            
+            paragraphs.forEach((paragraph, index) => {
+                const p = document.createElement('p');
+                p.className = 'article-text';
+                p.textContent = paragraph + (index < paragraphs.length - 1 ? '.' : '');
+                contentDiv.appendChild(p);
+            });
+
+            // 更新页面标题
+            const title = news[`headline_${lang}`] || news.headline;
+            document.title = title + ' - MERCEDES F1';
+            
+            // 更新html lang属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>
+

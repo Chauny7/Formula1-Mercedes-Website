@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes F1 Wallpapers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ========== 全局暗色主题（黑 / PETRONAS 青绿色 / 银色） ========== */
+        body.theme-dark {
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-bar {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.98));
+            border-bottom: 1px solid rgba(0, 210, 190, 0.6);
+            box-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        body.theme-dark .header-logo {
+            background: linear-gradient(135deg, #00D2BE, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.theme-dark .header-nav .nav-item {
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .header-nav .nav-item.active {
+            color: #050505;
+        }
+
+        body.theme-dark .header-nav .nav-item.active::after {
+            background: #00D2BE;
+        }
+
+        body.theme-dark .gallery-title {
+            background: linear-gradient(135deg, #00D2BE, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.theme-dark .gallery-subtitle {
+            color: #cccccc;
+        }
+
+        body.theme-dark .login-btn {
+            background: rgba(8, 8, 8, 0.8);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #008f9c);
+            color: #050505;
+        }
+
+        body.theme-dark .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #ffffff;
+        }
+
+        /* 主题切换按钮样式 */
+        .theme-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .theme-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #2b2b2b);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.3);
+        }
+
+        body.theme-dark .theme-toggle-btn {
+            background: rgba(0, 0, 0, 0.85);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* 语言切换按钮样式 */
+        .lang-toggle-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 210, 190, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lang-toggle-btn:hover {
+            background: linear-gradient(135deg, #000000, #252525);
+            color: #00D2BE;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.4);
+        }
+
+        body.theme-dark .lang-toggle-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.7);
+        }
+
+        /* Login按钮样式 */
+        .login-btn {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 210, 190, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 210, 190, 0.2);
+        }
+
+        .login-btn.logged-in {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border-color: #00D2BE;
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
+        }
+
+        .login-btn.logged-in .login-btn-text {
+            display: inline-block;
+            position: relative;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text {
+            opacity: 0;
+        }
+
+        .login-btn.logged-in:hover .login-btn-text::after {
+            content: attr(data-logout-text);
+            position: absolute;
+            left: 0;
+            opacity: 1;
+        }
+
+        /* 登录模态框样式 */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .login-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        body.theme-dark .login-content {
+            background: #0b0b0b;
+            color: #e5e5e5;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        body.theme-dark .login-title {
+            color: #f5f5f5;
+        }
+
+        .login-form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        body.theme-dark .login-label {
+            color: #e5e5e5;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 210, 190, 0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        body.theme-dark .login-input {
+            background: #1a1a1a;
+            color: #e5e5e5;
+            border-color: rgba(0, 210, 190, 0.5);
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #00D2BE;
+            box-shadow: 0 0 0 3px rgba(0, 210, 190, 0.1);
+        }
+
+        .login-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .login-error.active {
+            display: block;
+        }
+
+        .login-input.error {
+            border-color: #e74c3c;
+        }
+
+        .login-input.error:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .login-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-submit-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        .login-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: #666;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .login-close:hover {
+            background: rgba(0, 0, 0, 0.2);
+            color: #000;
+        }
+
+        body.theme-dark .login-close {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .login-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #00D2BE;
+        }
+
+        /* ========== 顶部导航栏 ========== */
+        .header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(0, 210, 190, 0.2);
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-logo:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: scale(1.05);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 35px;
+        }
+
+        .nav-item {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .nav-item:hover {
+            background: transparent;
+            color: #333;
+        }
+
+        .nav-item.active {
+            font-weight: 700;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00D2BE;
+            border-radius: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* ========== 主体内容区 ========== */
+        .main-content {
+            margin-top: 70px;
+            padding: 40px 40px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== 壁纸画廊样式 ========== */
+        .wallpaper-gallery {
+            width: 100%;
+            min-height: calc(100vh - 110px);
+            padding: 20px 0;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00D2BE, #000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .wallpaper-item {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .wallpaper-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .wallpaper-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-image {
+            transform: scale(1.05);
+        }
+
+        .wallpaper-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wallpaper-item:hover .wallpaper-overlay {
+            opacity: 1;
+        }
+
+        .wallpaper-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .wallpaper-info {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ========== 照片查看器样式 ========== */
+        .wallpaper-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .wallpaper-viewer.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .viewer-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .viewer-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .viewer-info {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .viewer-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .viewer-details {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .viewer-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .viewer-btn {
+            padding: 12px 30px;
+            border: 2px solid #00D2BE;
+            background: transparent;
+            color: #00D2BE;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .viewer-btn:hover {
+            background: #00D2BE;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.4);
+        }
+
+        .viewer-btn.download-btn {
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+        }
+
+        .viewer-btn.download-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        .viewer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .viewer-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00D2BE;
+            color: #00D2BE;
+            transform: rotate(90deg);
+        }
+
+        /* ========== 下载成功提示界面 ========== */
+        .download-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .download-success-modal.active {
+            display: flex;
+        }
+
+        .download-success-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .download-success-icon {
+            font-size: 48px;
+            color: #00D2BE;
+            margin-bottom: 20px;
+        }
+
+        .download-success-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .download-success-message {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .download-success-btn {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #00D2BE, #00A8CC);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-success-btn:hover {
+            background: linear-gradient(135deg, #00A8CC, #00D2BE);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 210, 190, 0.5);
+        }
+
+        body.theme-dark .download-success-content {
+            background: #0b0b0b;
+            color: #e5e5e5;
+        }
+
+        body.theme-dark .download-success-title {
+            color: #f5f5f5;
+        }
+
+        body.theme-dark .download-success-message {
+            color: #cccccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 0 20px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .wallpaper-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .gallery-title {
+                font-size: 2rem;
+            }
+
+            .gallery-subtitle {
+                font-size: 1rem;
+            }
+
+            .wallpaper-item {
+                height: 180px;
+            }
+
+            .viewer-image {
+                max-height: 70vh;
+            }
+
+            .viewer-name {
+                font-size: 1.2rem;
+            }
+
+            .viewer-details {
+                font-size: 0.9rem;
+            }
+
+            .viewer-controls {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .viewer-btn {
+                width: 100%;
+            }
+
+            .viewer-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 顶部导航栏 ========== -->
+    <header class="header-bar">
+        <a href="Home-Page.html" class="header-logo">MERCEDES F1</a>
+        
+        <nav class="header-nav">
+            <a href="Home-Page.html" class="nav-item" id="nav-home">Home</a>
+            <a href="Team-Page.html" class="nav-item" id="nav-team">TEAM</a>
+            <a href="Wallpapers-Page.html" class="nav-item active" id="nav-wallpapers">Wallpapers</a>
+            <a href="Schedule-Page.html" class="nav-item" id="nav-schedule">Schedule</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="lang-toggle-btn" id="langToggleBtn">中文</button>
+            <button class="theme-toggle-btn" id="themeToggleBtn">Dark Mode</button>
+            <button class="login-btn" id="loginBtn" onclick="handleLoginClick()">
+                <span class="login-btn-text" id="loginBtnText">Login</span>
+            </button>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <!-- 壁纸界面 -->
+        <div class="wallpaper-gallery">
+            <div class="gallery-header">
+                <h2 class="gallery-title">Mercedes F1 Wallpaper Gallery</h2>
+                <p class="gallery-subtitle">Premium HD wallpapers showcasing Silver Arrows excellence</p>
+            </div>
+            
+            <div class="wallpaper-grid" id="wallpaperGrid">
+                <!-- 壁纸将通过JavaScript动态加载 -->
+            </div>
+        </div>
+
+        <!-- 照片查看器 -->
+        <div class="wallpaper-viewer" id="wallpaperViewer">
+            <div class="viewer-close" id="viewerClose">×</div>
+            <div class="viewer-container">
+                <img class="viewer-image" id="viewerImage" src="" alt="">
+                <div class="viewer-info">
+                    <div class="viewer-name" id="viewerName"></div>
+                    <div class="viewer-details" id="viewerDetails"></div>
+                    <div class="viewer-controls">
+                        <button class="viewer-btn download-btn" id="viewerDownloadBtn">Download</button>
+                        <button class="viewer-btn" id="viewerCloseBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下载成功提示界面 -->
+        <div class="download-success-modal" id="downloadSuccessModal">
+            <div class="download-success-content">
+                <div class="download-success-icon">✓</div>
+                <div class="download-success-title">Download Started</div>
+                <div class="download-success-message">Your wallpaper download has started. Check your downloads folder.</div>
+                <button class="download-success-btn" id="downloadSuccessCloseBtn">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 登录模态框 -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <button class="login-close" id="loginCloseBtn">×</button>
+            <h2 class="login-title">Login</h2>
+            <form id="loginForm">
+                <div class="login-form-group">
+                    <label class="login-label" for="username">Username</label>
+                    <input type="text" id="username" class="login-input" placeholder="Enter your username" required>
+                    <div class="login-error" id="usernameError"></div>
+                </div>
+                <div class="login-form-group">
+                    <label class="login-label" for="password">Password</label>
+                    <input type="password" id="password" class="login-input" placeholder="Enter your password" required>
+                    <div class="login-error" id="passwordError"></div>
+                </div>
+                <button type="submit" class="login-submit-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========== 语言切换：英 / 中 ==========
+        const i18n = {
+            en: {
+                'nav-home': 'Home',
+                'nav-team': 'TEAM',
+                'nav-wallpapers': 'Wallpapers',
+                'nav-schedule': 'Schedule',
+                'login-btn': 'Login',
+                'logout-text': 'Logout',
+                'username-error': 'Please enter username',
+                'password-error': 'Please enter password',
+                'dark-mode': 'Dark Mode',
+                'light-mode': 'Light Mode',
+                'login-title': 'Login',
+                'username-label': 'Username',
+                'password-label': 'Password',
+                'username-placeholder': 'Enter your username',
+                'password-placeholder': 'Enter your password',
+                'login-submit': 'Login'
+            },
+            zh: {
+                'nav-home': '首页',
+                'nav-team': '车队',
+                'nav-wallpapers': '壁纸',
+                'nav-schedule': '赛程',
+                'login-btn': '登录',
+                'logout-text': '登出',
+                'username-error': '请输入用户名',
+                'password-error': '请输入密码',
+                'dark-mode': '深色模式',
+                'light-mode': '浅色模式',
+                'login-title': '登录',
+                'username-label': '用户名',
+                'password-label': '密码',
+                'username-placeholder': '请输入用户名',
+                'password-placeholder': '请输入密码',
+                'login-submit': '登录'
+            }
+        };
+
+        function applyLanguage(lang) {
+            const dict = i18n[lang] || i18n.en;
+            const setText = (id, key) => {
+                const el = document.getElementById(id);
+                if (el && key in dict) {
+                    el.textContent = dict[key];
+                }
+            };
+
+            setText('nav-home', 'nav-home');
+            setText('nav-team', 'nav-team');
+            setText('nav-wallpapers', 'nav-wallpapers');
+            setText('nav-schedule', 'nav-schedule');
+            
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtnText && loginBtn && !loginBtn.classList.contains('logged-in')) {
+                loginBtnText.textContent = dict['login-btn'] || 'Login';
+            }
+            
+            if (loginBtnText && loginBtn && loginBtn.classList.contains('logged-in')) {
+                loginBtnText.setAttribute('data-logout-text', dict['logout-text'] || 'Logout');
+            }
+            
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            if (themeToggleBtn) {
+                const isDark = document.body.classList.contains('theme-dark');
+                themeToggleBtn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+            
+            const loginTitle = document.querySelector('.login-title');
+            if (loginTitle) {
+                loginTitle.textContent = dict['login-title'] || 'Login';
+            }
+            
+            const usernameLabel = document.querySelector('label[for="username"]');
+            if (usernameLabel) {
+                usernameLabel.textContent = dict['username-label'] || 'Username';
+            }
+            
+            const passwordLabel = document.querySelector('label[for="password"]');
+            if (passwordLabel) {
+                passwordLabel.textContent = dict['password-label'] || 'Password';
+            }
+            
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) {
+                usernameInput.placeholder = dict['username-placeholder'] || 'Enter your username';
+            }
+            
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.placeholder = dict['password-placeholder'] || 'Enter your password';
+            }
+            
+            const loginSubmitBtn = document.querySelector('.login-submit-btn');
+            if (loginSubmitBtn) {
+                loginSubmitBtn.textContent = dict['login-submit'] || 'Login';
+            }
+            
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+            if (usernameError && 'username-error' in dict) {
+                usernameError.setAttribute('data-text', dict['username-error']);
+            }
+            if (passwordError && 'password-error' in dict) {
+                passwordError.setAttribute('data-text', dict['password-error']);
+            }
+
+            const langBtn = document.getElementById('langToggleBtn');
+            if (langBtn) {
+                langBtn.textContent = lang === 'en' ? '中文' : 'EN';
+            }
+        }
+
+        function applyStoredLanguage() {
+            try {
+                const stored = localStorage.getItem('siteLang') || 'en';
+                applyLanguage(stored);
+            } catch (e) {
+                console.error('Lang apply error:', e);
+                applyLanguage('en');
+            }
+        }
+
+        function initLanguageToggle() {
+            const btn = document.getElementById('langToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const current = localStorage.getItem('siteLang') || 'en';
+                const next = current === 'en' ? 'zh' : 'en';
+                localStorage.setItem('siteLang', next);
+                applyLanguage(next);
+            });
+        }
+
+        // ========== 登录功能 ==========
+        function handleLoginClick() {
+            const username = localStorage.getItem('loggedInUser');
+            if (username) {
+                logout();
+            } else {
+                openLoginModal();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.textContent = i18n[currentLang]['login-btn'] || 'Login';
+                loginBtnText.removeAttribute('data-logout-text');
+                loginBtn.classList.remove('logged-in');
+            }
+            setTimeout(() => {
+                openLoginModal();
+            }, 100);
+        }
+        
+        function openLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                const usernameError = document.getElementById('usernameError');
+                const passwordError = document.getElementById('passwordError');
+                
+                if (usernameInput) usernameInput.classList.remove('error');
+                if (passwordInput) passwordInput.classList.remove('error');
+                if (usernameError) usernameError.classList.remove('active');
+                if (passwordError) passwordError.classList.remove('active');
+                
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) loginForm.reset();
+                
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('loggedInUser');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (username && loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        function updateLoginButton(username) {
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            if (loginBtn && loginBtnText) {
+                loginBtnText.textContent = username;
+                loginBtn.classList.add('logged-in');
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                loginBtnText.setAttribute('data-logout-text', i18n[currentLang]['logout-text'] || 'Logout');
+            }
+        }
+
+        function initLogin() {
+            const loginForm = document.getElementById('loginForm');
+            const loginCloseBtn = document.getElementById('loginCloseBtn');
+            const loginModal = document.getElementById('loginModal');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const usernameInput = document.getElementById('username');
+                    const passwordInput = document.getElementById('password');
+                    const usernameError = document.getElementById('usernameError');
+                    const passwordError = document.getElementById('passwordError');
+                    
+                    const username = usernameInput.value.trim();
+                    const password = passwordInput.value.trim();
+                    
+                    usernameInput.classList.remove('error');
+                    passwordInput.classList.remove('error');
+                    usernameError.classList.remove('active');
+                    passwordError.classList.remove('active');
+                    
+                    let hasError = false;
+                    
+                    if (!username) {
+                        usernameInput.classList.add('error');
+                        const currentLang = localStorage.getItem('siteLang') || 'en';
+                        usernameError.textContent = i18n[currentLang]['username-error'] || 'Please enter username';
+                        usernameError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    if (!password) {
+                        passwordInput.classList.add('error');
+                        const currentLang = localStorage.getItem('siteLang') || 'en';
+                        passwordError.textContent = i18n[currentLang]['password-error'] || 'Please enter password';
+                        passwordError.classList.add('active');
+                        hasError = true;
+                    }
+                    
+                    if (hasError) {
+                        return;
+                    }
+
+                    localStorage.setItem('loggedInUser', username);
+                    updateLoginButton(username);
+                    closeLoginModal();
+                    loginForm.reset();
+                });
+            }
+
+            if (loginCloseBtn) {
+                loginCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeLoginModal();
+                });
+            }
+
+            if (loginModal) {
+                loginModal.addEventListener('click', function(e) {
+                    if (e.target === loginModal) {
+                        closeLoginModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const loginModal = document.getElementById('loginModal');
+                    if (loginModal && loginModal.classList.contains('active')) {
+                        closeLoginModal();
+                    }
+                }
+            });
+        }
+
+        // ========== 主题切换：读取与应用 ==========
+        function updateThemeButtonText() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) {
+                const currentLang = localStorage.getItem('siteLang') || 'en';
+                const dict = i18n[currentLang] || i18n.en;
+                const isDark = document.body.classList.contains('theme-dark');
+                btn.textContent = isDark ? (dict['light-mode'] || 'Light Mode') : (dict['dark-mode'] || 'Dark Mode');
+            }
+        }
+
+        // 主题切换
+        function applyStoredTheme() {
+            try {
+                const stored = localStorage.getItem('siteTheme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (prefersDark ? 'dark' : 'light');
+                if (theme === 'dark') {
+                    document.body.classList.add('theme-dark');
+                } else {
+                    document.body.classList.remove('theme-dark');
+                }
+                updateThemeButtonText();
+            } catch (e) {
+                console.error('Theme apply error:', e);
+            }
+        }
+
+        function initThemeToggle() {
+            const btn = document.getElementById('themeToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                const isDark = document.body.classList.toggle('theme-dark');
+                localStorage.setItem('siteTheme', isDark ? 'dark' : 'light');
+                updateThemeButtonText();
+            });
+        }
+
+        // 壁纸数据
+        const wallpapers = [
+            { name: "Lewis Hamilton", file: "Desktop_LH2.jpg", info: "Seven-time World Champion" },
+            { name: "Toto Wolff", file: "Toto Wolff 2025 Desktop Wallpaper 3.jpg", info: "Team Principal" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 1.jpg", info: "Dutch Grand Prix" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 2.jpg", info: "Dutch Grand Prix" },
+            { name: "Dutch GP 2025", file: "Dutch GP 2025 Desktop Wallpaper 3.jpg", info: "Dutch Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 1.jpg", info: "Italian Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 2.jpg", info: "Italian Grand Prix" },
+            { name: "Italian GP 2025", file: "Italian GP 2025 Desktop Wallpaper 3.jpg", info: "Italian Grand Prix" },
+            { name: "Azerbaijan GP 2025", file: "Azerbaijan GP 2025 Desktop Wallpaper 2.jpg", info: "Azerbaijan Grand Prix" },
+            { name: "Azerbaijan GP 2025", file: "Azerbaijan GP 2025 Desktop Wallpaper 3.jpg", info: "Azerbaijan Grand Prix" },
+            { name: "Canadian GP 2024", file: "Canadian GP 2024 Desktop Wallpaper 1.jpg", info: "Canadian Grand Prix" },
+            { name: "Belgian GP 2025", file: "2025 Belgian GP Desktop Wallpaper 2.jpg", info: "Belgian Grand Prix" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 1.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 2.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Goodwood FoS 2025", file: "Goodwood FoS 2025 Desktop Wallpaper 3.jpg", info: "Goodwood Festival of Speed" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 1.jpg", info: "Monza Black & White" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 2.jpg", info: "Monza Black & White" },
+            { name: "Monza B&W", file: "Monza B&W Desktop Wallpaper 3.jpg", info: "Monza Black & White" },
+            { name: "Retro Desktop", file: "Retro Desktop Wallpaper 1.png", info: "Retro Style" },
+            { name: "Retro Desktop", file: "Retro Desktop Wallpaper 3.png", info: "Retro Style" },
+            { name: "Silver Arrows 2025", file: "Silver Arrows 2025 Desktop Wallpaper 2.jpg", info: "Silver Arrows 2025" },
+            { name: "Sketch Desktop", file: "Sketch Desktop Wallpaper 5.png", info: "Sketch Style" },
+            { name: "Sketch Desktop", file: "Sketch Desktop Wallpaper 6.png", info: "Sketch Style" },
+            { name: "Summer Stripes", file: "Summer Stripes Desktop Wallpaper 2.jpg", info: "Summer Stripes" },
+            { name: "Thank You Lewis", file: "Thank You Lewis Desktop Wallpaper 4.jpg", info: "Thank You Lewis" },
+            { name: "Mercedes-AMG F1", file: "Mercedes-AMG F1 W16 E Performance Desktop Wallpaper 6.png", info: "Mercedes-AMG F1" },
+            { name: "W3 Blueprint", file: "W3 - LH W15 Blueprint.jpg", info: "W15 Blueprint" },
+            { name: "Gallery 1", file: "Gallery-1.webp", info: "Gallery Selection" },
+            { name: "Gallery 3", file: "Gallery-3.webp", info: "Gallery Selection" },
+            { name: "Bio Resin", file: "Bio-Resin-WEB-1.webp", info: "Bio Resin" },
+            { name: "M350989", file: "M350989.jpg", info: "Team Photos" },
+            { name: "M387931", file: "M387931.jpg", info: "Team Photos" },
+            { name: "LH 16x9", file: "LH_16x9.png", info: "Lewis Hamilton 16:9" },
+            { name: "LH 1", file: "LH_1.png", info: "Lewis Hamilton Selection" },
+            { name: "Homepage", file: "首页.webp", info: "Homepage Wallpaper" },
+            { name: "Homepage B&W", file: "首页（黑白）.jpg", info: "Homepage Black & White" }
+        ];
+
+        // 当前查看的壁纸信息
+        let currentWallpaper = null;
+
+        // 加载壁纸
+        function loadWallpapers() {
+            const wallpaperGrid = document.getElementById('wallpaperGrid');
+            wallpaperGrid.innerHTML = '';
+
+            wallpapers.forEach((wallpaper, index) => {
+                const wallpaperItem = document.createElement('div');
+                wallpaperItem.className = 'wallpaper-item';
+                wallpaperItem.innerHTML = `
+                    <img src="Asset/${wallpaper.file}" alt="${wallpaper.name}" class="wallpaper-image" loading="lazy">
+                    <div class="wallpaper-overlay">
+                        <div class="wallpaper-name">${wallpaper.name}</div>
+                        <div class="wallpaper-info">${wallpaper.info}</div>
+                    </div>
+                `;
+                
+                wallpaperItem.addEventListener('click', function() {
+                    openWallpaperViewer(wallpaper);
+                });
+                
+                wallpaperGrid.appendChild(wallpaperItem);
+            });
+        }
+
+        // 打开照片查看器
+        function openWallpaperViewer(wallpaper) {
+            currentWallpaper = wallpaper;
+            const viewer = document.getElementById('wallpaperViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const viewerName = document.getElementById('viewerName');
+            const viewerDetails = document.getElementById('viewerDetails');
+
+            viewerImage.src = `Asset/${wallpaper.file}`;
+            viewerName.textContent = wallpaper.name;
+            viewerDetails.textContent = wallpaper.info;
+            
+            viewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭照片查看器
+        function closeWallpaperViewer() {
+            const viewer = document.getElementById('wallpaperViewer');
+            viewer.classList.remove('active');
+            document.body.style.overflow = '';
+            currentWallpaper = null;
+        }
+
+        // 显示下载成功提示
+        function showDownloadSuccess() {
+            const modal = document.getElementById('downloadSuccessModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        // 关闭下载成功提示
+        function closeDownloadSuccess() {
+            const modal = document.getElementById('downloadSuccessModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // 初始化查看器事件
+        function initWallpaperViewer() {
+            const viewerClose = document.getElementById('viewerClose');
+            const viewerCloseBtn = document.getElementById('viewerCloseBtn');
+            const viewerDownloadBtn = document.getElementById('viewerDownloadBtn');
+            const viewer = document.getElementById('wallpaperViewer');
+            const downloadSuccessCloseBtn = document.getElementById('downloadSuccessCloseBtn');
+
+            if (viewerClose) {
+                viewerClose.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeWallpaperViewer();
+                });
+            }
+            if (viewerCloseBtn) {
+                viewerCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeWallpaperViewer();
+                });
+            }
+
+            if (viewerDownloadBtn) {
+                viewerDownloadBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (currentWallpaper) {
+                        downloadWallpaper(currentWallpaper.file, currentWallpaper.name);
+                    }
+                });
+            }
+
+            if (downloadSuccessCloseBtn) {
+                downloadSuccessCloseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    closeDownloadSuccess();
+                    closeWallpaperViewer();
+                });
+            }
+
+            const downloadSuccessModal = document.getElementById('downloadSuccessModal');
+            if (downloadSuccessModal) {
+                downloadSuccessModal.addEventListener('click', function(e) {
+                    if (e.target === downloadSuccessModal) {
+                        closeDownloadSuccess();
+                        closeWallpaperViewer();
+                    }
+                });
+            }
+
+            if (viewer) {
+                viewer.addEventListener('click', function(e) {
+                    if (e.target === viewer) {
+                        closeWallpaperViewer();
+                    }
+                });
+            }
+
+            const viewerContainer = document.querySelector('.viewer-container');
+            if (viewerContainer) {
+                viewerContainer.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    const downloadSuccessModal = document.getElementById('downloadSuccessModal');
+                    const viewer = document.getElementById('wallpaperViewer');
+
+                    if (downloadSuccessModal && downloadSuccessModal.classList.contains('active')) {
+                        closeDownloadSuccess();
+                    }
+
+                    if (viewer && viewer.classList.contains('active')) {
+                        closeWallpaperViewer();
+                    }
+                }
+            });
+        }
+
+        // 下载壁纸
+        async function downloadWallpaper(filename, name) {
+            try {
+                const downloadBtn = document.getElementById('viewerDownloadBtn');
+                const originalText = downloadBtn.textContent;
+                downloadBtn.textContent = 'Downloading...';
+                downloadBtn.disabled = true;
+
+                const imageUrl = `Asset/${filename}`;
+                const isLocalFile = window.location.protocol === 'file:';
+                
+                if (isLocalFile) {
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    
+                    const link = document.createElement('a');
+                    link.href = imageUrl;
+                    link.download = downloadName;
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                    showDownloadSuccess();
+                } else {
+                    const response = await fetch(imageUrl);
+                    if (!response.ok) {
+                        throw new Error('下载失败：无法获取图片');
+                    }
+                    
+                    const blob = await response.blob();
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = downloadName;
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                    
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                    showDownloadSuccess();
+                }
+            } catch (error) {
+                console.error('下载失败:', error);
+                
+                try {
+                    const fileExtension = filename.split('.').pop();
+                    const downloadName = `${name}_wallpaper.${fileExtension}`;
+                    const imageUrl = `Asset/${filename}`;
+                    
+                    const link = document.createElement('a');
+                    link.href = imageUrl;
+                    link.download = downloadName;
+                    link.target = '_blank';
+                    link.style.display = 'none';
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    showDownloadSuccess();
+                } catch (fallbackError) {
+                    console.error('备用下载方法也失败:', fallbackError);
+                    alert('下载失败，请稍后重试。\n如果问题持续，请右键点击图片选择"另存为"。');
+                }
+                
+                const downloadBtn = document.getElementById('viewerDownloadBtn');
+                if (downloadBtn) {
+                    downloadBtn.textContent = 'Download';
+                    downloadBtn.disabled = false;
+                }
+            }
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            applyStoredLanguage();
+            initLanguageToggle();
+            applyStoredTheme();
+            initThemeToggle();
+            initLogin();
+            checkLoginStatus();
+            loadWallpapers();
+            initWallpaperViewer();
+        });
+    </script>
+</body>
+</html>
+
